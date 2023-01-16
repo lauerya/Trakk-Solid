@@ -53,7 +53,11 @@ createEffect(() => {
 
     return <>
         <For each={taskList()}>
-            {(todo) => <TaskComponent todo={todo} setTodos={setTaskList} />}
+            {(todo) =>
+                <div class={"list-disc list-outside "}>
+                    <TaskComponent todo={todo} setTodos={setTaskList} />
+                </div>
+            }
         </For>
 
         <AddTaskForm setTodos={setTaskList} />

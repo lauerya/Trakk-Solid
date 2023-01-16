@@ -16,7 +16,8 @@ export function AddTaskForm(props: any) {
 
     return (
         <form>
-            <input
+
+            <input class={"task-input"}
                 onChange={(e) => {
                     let newTask: Task;
                     newTask = {
