@@ -19,15 +19,10 @@ createEffect(() => {
 })
     const updateTask = async (e: Event) => {
         e.preventDefault()
-
         try {
             setLoading(true)
-            const updates = {
-                taskList
-            }
-
+            const updates = { taskList }
             let { error } = await supabase.from('task').update(updates)
-
             if (error) {
                 throw error
             }
@@ -52,14 +47,20 @@ createEffect(() => {
 
 
     return <>
-        <For each={taskList()}>
-            {(todo) =>
-                <div class={"list-disc list-outside "}>
-                    <TaskComponent todo={todo} setTodos={setTaskList} />
-                </div>
-            }
-        </For>
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="mx-auto max-w-3xl">
+        <div class="overflow-hidden bg-gray-300 shadow sm:rounded-md">
+            <ul role="list" class="divide-y divide-gray-200">
 
+                <For each={taskList()}>
+                    {(todo: Task) =>
+                        <TaskComponent todo={todo} setTodos={setTaskList} />
+                    }
+                </For>
+            </ul>
+        </div>
+            </div>
+        </div>
         <AddTaskForm setTodos={setTaskList} />
     </>
 }

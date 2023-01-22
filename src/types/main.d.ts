@@ -49,3 +49,10 @@ interface TaskList {
 interface AreaList {
     areaList: Area[];
 }
+
+interface User {
+    id: string;
+    userName: string;
+    avatar_url: string;
+    website: string;
+}

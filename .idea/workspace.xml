@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3041908b-f5cd-45ca-a97a-e00c1658b201" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/login.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddTaskForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTaskForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/types/main.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/main.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +45,7 @@
     "WebServerToolWindowFactoryState": "false",
     "last_opened_file_path": "/Users/ryanlauer/Documents/GitHub/Trakk-Solid",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "vcs.Git",
     "ts.external.directory.path": "/Users/ryanlauer/Documents/GitHub/Trakk-Solid/node_modules/typescript/lib",
     "vue.rearranger.settings.migration": "true"
   }
@@ -60,7 +65,8 @@
       <option name="presentableId" value="Default" />
       <updated>1673803599472</updated>
       <workItem from="1673803601780" duration="19352000" />
-      <workItem from="1673902806951" duration="1242000" />
+      <workItem from="1673902806951" duration="3410000" />
+      <workItem from="1674405104037" duration="9287000" />
     </task>
     <servers />
   </component>
