@@ -1,5 +1,6 @@
 import {supabase} from "../supabase-client";
 import {Show} from "solid-js";
+import {A} from "@solidjs/router";
 
 export default function TaskComponent(props: any) {
 
@@ -30,7 +31,7 @@ export default function TaskComponent(props: any) {
 
     return <>
         <li>
-            <a href="#" class="block hover:bg-gray-50">
+            <A href="#" class="block hover:bg-gray-50">
                 <div class="px-4 py-4 sm:px-6">
                     <button class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800" onClick={() => deleteTodo(props.todo.id)}>X</button>
                     <div class="flex items-center justify-between">
@@ -61,7 +62,7 @@ export default function TaskComponent(props: any) {
                         </div>
                     </div>
                 </div>
-            </a>
+            </A>
         </li>
     </>
 }

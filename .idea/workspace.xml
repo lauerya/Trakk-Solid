@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3041908b-f5cd-45ca-a97a-e00c1658b201" name="Changes" comment="">
+    <list default="true" id="3041908b-f5cd-45ca-a97a-e00c1658b201" name="Changes" comment="Adding Task with buttons working">
+      <change afterPath="$PROJECT_DIR$/src/assets/add-plus-svgrepo-com.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AddTask/AddButton.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/AddTask/AddTaskModal.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Navbar.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Weather.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/404.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/Today.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddTaskForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTaskForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Account.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddTaskForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTask/AddTaskForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TaskComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskComponent.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TaskList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/login.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/types/main.d.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/main.d.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,24 +49,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/ryanlauer/Documents/GitHub/Trakk-Solid",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "ts.external.directory.path": "/Users/ryanlauer/Documents/GitHub/Trakk-Solid/node_modules/typescript/lib",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/ryanlauer/Documents/GitHub/Trakk-Solid&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/ryanlauer/Documents/GitHub/Trakk-Solid/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/components/AddTask" />
+      <recent name="$PROJECT_DIR$/src/assets" />
       <recent name="$PROJECT_DIR$/src/routes" />
+      <recent name="$PROJECT_DIR$" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -66,14 +81,30 @@
       <updated>1673803599472</updated>
       <workItem from="1673803601780" duration="19352000" />
       <workItem from="1673902806951" duration="3410000" />
-      <workItem from="1674405104037" duration="9287000" />
+      <workItem from="1674405104037" duration="14761000" />
+      <workItem from="1674583306330" duration="3138000" />
+      <workItem from="1674859805703" duration="5790000" />
+      <workItem from="1675126468355" duration="7136000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Adding Task with buttons working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Task with buttons working" />
   </component>
 </project>

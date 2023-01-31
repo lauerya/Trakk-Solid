@@ -1,11 +1,9 @@
-import {batch, Component, createEffect, createSignal, For, Index} from "solid-js";
+import {createEffect, createSignal, For} from "solid-js";
 import {supabase} from "../supabase-client";
 import TaskComponent from "./TaskComponent";
-import {AddTaskForm} from "./AddTaskForm";
+import AddButton from "./AddTask/AddButton";
+import {Task} from "../types/main";
 
-interface ITaskList {
-    taskList: Task[];
-}
 function TaskList() {
     const [loading, setLoading] = createSignal(true)
     const [taskList, setTaskList] = createSignal<Task[] | null>(null)
@@ -41,10 +39,10 @@ createEffect(() => {
             console.log(error)
             throw error
         }
+        console.log(JSON.stringify(data))
         setTaskList(data);
         return data
     }
-
 
     return <>
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -61,7 +59,6 @@ createEffect(() => {
         </div>
             </div>
         </div>
-        <AddTaskForm setTodos={setTaskList} />
     </>
 }
 

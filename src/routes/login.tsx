@@ -1,6 +1,7 @@
 import { createSignal } from 'solid-js'
 import { supabase } from '../supabase-client'
-import LoginWithGoogle from "./LoginWithGoogle";
+import LoginWithGoogle from "../components/LoginWithGoogle";
+import {A} from "@solidjs/router";
 
 export default function Auth() {
     const [loading, setLoading] = createSignal(false)
@@ -28,16 +29,16 @@ export default function Auth() {
                 <form class="form-widget" onSubmit={handleOtpLogin}>
                   <div class="h-full bg-slate-800 w-full py-16 px-4">
                 <div class="flex flex-col items-center justify-center">
-                    <img src="" alt="logo"/> {/*TODO: Add Logo*/}
+                    <img src="src/routes/login" alt="logo"/> {/*TODO: Add Logo*/}
                         <div class="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
                             <p tabIndex="0"
                                class="focus:outline-none text-2xl font-extrabold leading-6 text-gray-800">Login to
                                 Trakk</p>
                             <p tabIndex="0"
                                class="focus:outline-none text-sm mt-4 font-medium leading-none text-gray-500">Don't
-                                have account? <a href="javascript:void(0)"
+                                have account? <A href="javascript:void(0)"
                                                  class="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer"> Sign
-                                    up here</a></p>
+                                    up here</A></p>
                             <LoginWithGoogle></LoginWithGoogle>
 
                             <div class="w-full flex items-center justify-between py-5">

@@ -14,6 +14,7 @@ interface Task {
 }
 
 interface Area {
+    id: string
     created_at: string;
     name: string;
     image: string;
@@ -39,7 +40,7 @@ interface Profile {
     avatar_url: string;
     website: string;
     user_id: string;
-
+    id: string;
 }
 
 interface TaskList {
@@ -50,9 +51,15 @@ interface AreaList {
     areaList: Area[];
 }
 
-interface User {
+interface Profile {
     id: string;
     userName: string;
     avatar_url: string;
     website: string;
 }
+
+interface EffortType {
+    effortName: string;
+}
+
+export type EffortTypeEnum = "Easy Peasy" | "Shouldn't be too bad" | "This'll be rough"

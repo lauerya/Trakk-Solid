@@ -1,5 +1,5 @@
 import { AuthSession } from '@supabase/supabase-js'
-import { Component, createEffect, createSignal } from 'solid-js'
+import {Component, createEffect, createSignal, onMount} from 'solid-js'
 import { supabase } from '../supabase-client'
 
 interface Props {
@@ -12,8 +12,8 @@ const Account: Component<Props> = ({ session }) => {
     const [website, setWebsite] = createSignal<string | null>(null)
     const [avatarUrl, setAvatarUrl] = createSignal<string | null>(null)
 
-    createEffect(() => {
-        getProfile()
+    onMount(() => {
+        getProfile();
     })
 
     const getProfile = async () => {
