@@ -21,6 +21,7 @@ export function AddTaskForm(props: any) {
     const [user, setUser] = createSignal<User | null>();
     const [areas, setAreas] = createSignal<Area[] | null>()
     const [users, setUsers] = createSignal<Profile[]>()
+    const [errorMessage, setErrorMessage] = createSignal<string>("")
     const [effortTypes, setEffortTypes] = createSignal<EffortType[]>()
     const [taskForm, setTaskForm] = createStore<Task>({
         name: "",
@@ -43,10 +44,19 @@ export function AddTaskForm(props: any) {
     createEffect(() => console.log(taskForm.name))
 
     const updateFormField = (fieldName: string) => (event: Event) => {
-        const inputElement = event.currentTarget as HTMLInputElement;
-        setTaskForm({
-            [fieldName]: inputElement.value
-        });
+        let inputElement: HTMLInputElement;
+         if (typeof event.currentTarget !== 'undefined') {
+             inputElement = event.currentTarget as HTMLInputElement;
+
+             setTaskForm({
+                [fieldName]: inputElement.value
+            });
+        } else {
+             setTaskForm({
+                 [fieldName]: event
+             });
+        }
+
         console.log(taskForm.areaId);
     };
     const addNewTask = async () => {
@@ -70,6 +80,8 @@ export function AddTaskForm(props: any) {
         if (error) {
             console.log(error)
             throw error
+        } else {
+            props.closeModal
         }
         return;
     }
@@ -86,10 +98,12 @@ export function AddTaskForm(props: any) {
         return data;
     }
 
+
     const getProfiles = async (): Promise<Profile[]> => {
         const {data, error} = await supabase.from('profiles').select('*')
         console.log(JSON.stringify(data))
         if (error) {
+            setErrorMessage(error.message)
             console.log(error);
             throw error;
         }
@@ -118,8 +132,12 @@ export function AddTaskForm(props: any) {
              <form onSubmit={() => addNewTask()}>
                     <div>
                         <h3 class="text-lg font-medium leading-6 text-gray-900">What needs to get done?</h3>
-                        <p class="mt-1 text-sm text-gray-500">There's nothing too big to tackle</p>
+                        <p class="mt-1 text-sm text-gray-500">There's nothing too big to tackle
+                        </p>
                     </div>
+                 <div >
+                     {errorMessage()}
+                 </div>
                     <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                         <div class="sm:col-span-3">
                             <label for="task-name" class="block text-sm font-medium text-gray-700">Task</label>
@@ -212,9 +230,7 @@ export function AddTaskForm(props: any) {
                         </div>
                     </div>
                 </form>
-
     <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
-        e.preventDefault();
         await addNewTask();
     }}
             class="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

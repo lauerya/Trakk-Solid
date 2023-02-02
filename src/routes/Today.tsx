@@ -3,10 +3,21 @@ import TaskList from "../components/TaskList";
 import AddButton from "../components/AddTask/AddButton";
 import {AddTaskForm} from "../components/AddTask/AddTaskForm";
 import {AddTaskModal} from "../components/AddTask/AddTaskModal";
+import {
+    Button, createDisclosure,
+    Modal,
+    ModalBody,
+    ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay
+} from "@hope-ui/solid";
 
 export default function Today() {
     const [toggleAddTask, setToggleAddTask] = createSignal(false);
     const toggle = () => setToggleAddTask(!toggleAddTask())
+    const { isOpen, onOpen, onClose } = createDisclosure()
 
     onMount(() => {
 
@@ -16,10 +27,22 @@ export default function Today() {
         <>
             <div>
                 <TaskList></TaskList>
-                    <Show when={toggleAddTask()}>
-                        <AddTaskModal openModal={toggleAddTask()} closeModal={toggleAddTask()}/>
+                    <Show when={isOpen}>
+                        <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
+                            <ModalOverlay />
+                            <ModalContent>
+                                <ModalCloseButton />
+                                <ModalHeader>Add Task</ModalHeader>
+                                <ModalBody>
+                                    <AddTaskForm closeModal={onClose}></AddTaskForm>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button onClick={onClose}>Close</Button>
+                                </ModalFooter>
+                            </ModalContent>
+                        </Modal>
                     </Show>
-                    <AddButton toggleTaskForm={() => toggle()}></AddButton>
+                    <AddButton toggleTaskForm={onOpen}></AddButton>
             </div>
         </>
     )

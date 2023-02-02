@@ -15,21 +15,20 @@ interface TaskModal{
     closeModal: boolean
 }
 export function AddTaskModal(props: any){
-    const { isOpen, onOpen, onClose } = createDisclosure()
 
     return(
         <>
             {JSON.stringify(props)}
-            <Modal size={"xl"} opened={props.openModal} onClose={() => props.closeModal}>
+            <Modal size={"xl"} opened={props.isModalOpen} onClose={props.closeModal}>
                 <ModalOverlay />
                 <ModalContent>
                     <ModalCloseButton />
                     <ModalHeader>Add Task</ModalHeader>
                     <ModalBody>
-                            <AddTaskForm></AddTaskForm>
+                        <AddTaskForm closeModal={props.closeModal}></AddTaskForm>
                     </ModalBody>
                     <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
+                        <Button onClick={props.closeModal}>Close</Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
