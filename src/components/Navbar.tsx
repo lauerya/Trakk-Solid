@@ -66,7 +66,9 @@ function Navbar() {
                               </div>
                         </div>
                     </div>
+                    <Show when={session() != undefined && session() != null}>
                     <AddButton toggleTaskForm={onOpen}></AddButton>
+                    </Show>
                     <Show when={isOpen}>
                         <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
                             <ModalOverlay />
