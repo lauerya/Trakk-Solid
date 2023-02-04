@@ -1,6 +1,6 @@
-import {A} from "@solidjs/router";
+import {A, useLocation, useNavigate} from "@solidjs/router";
 import AddButton from "./AddTask/AddButton";
-import {createSignal, Show} from "solid-js";
+import {createEffect, createSignal, Show} from "solid-js";
 import {AddTaskModal} from "./AddTask/AddTaskModal";
 import {
     Button, createDisclosure,
@@ -13,11 +13,29 @@ import {
     ModalOverlay
 } from "@hope-ui/solid";
 import {AddTaskForm} from "./AddTask/AddTaskForm";
+import { Routes, Route } from "@solidjs/router"
+import Today from "../routes/Today";
+import Account from "../routes/Account";
+import {AuthSession} from "@supabase/supabase-js";
+import {supabase} from "../supabase-client";
+import Auth from "../routes/login";
 
 function Navbar() {
     const toggle = () => setToggleAddTask(!toggleAddTask())
     const [toggleAddTask, setToggleAddTask] = createSignal(false);
     const { isOpen, onOpen, onClose } = createDisclosure()
+    const [session, setSession] = createSignal<AuthSession | null>(null)
+
+    createEffect(() => {
+        console.log(JSON.stringify(session))
+        supabase.auth.getSession().then(({ data: { session } }) => {
+            setSession(session)
+        })
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            setSession(session)
+        })
+    })
 
     return <>
         <nav class="bg-black">
@@ -25,21 +43,26 @@ function Navbar() {
                 <div class="flex h-16 items-center justify-between">
                     <div class="flex items-center">
                         <div class="flex-shrink-0">
-                            {/*<img class="block h-8 w-auto lg:hidden"*/}
-                            {/*     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"*/}
-                            {/*     alt="Your Company"/>*/}
-                            {/*    <img class="hidden h-8 w-auto lg:block"*/}
-                            {/*         src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"*/}
-                            {/*         alt="Your Company"/>*/}
+
                         </div>
                         <div class="hidden sm:ml-6 sm:block">
                             <div class="flex space-x-4">
-                                <A href="/Today"
-                                   class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Today</A>
-                                <A href="/Upcoming"
-                                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Upcoming</A>
-                                <A href="/Account"
-                                   class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Account</A>
+                                <Show when={session() != undefined && session() != null}>
+                                    <A href="/Today"
+                                       class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Today</A>
+                                    <A href="/Upcoming"
+                                       class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Upcoming</A>
+                                    <A href="/Account"
+                                       class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Account</A>
+                                    <A href="/Areas"
+                                       class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Areas</A>
+                                    <A href="/logout"
+                                       class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log Out</A>
+                                </Show>
+                               <Show when={session() == undefined && session() == null}>
+                                   <A href="/login"
+                                      class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Log In</A>
+                               </Show>
                               </div>
                         </div>
                     </div>

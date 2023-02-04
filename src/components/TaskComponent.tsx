@@ -26,7 +26,9 @@ export default function TaskComponent(props: any) {
         }
     }
     async function deleteTodo(id: number) {
+        //unable to pass child to parent. useContext?
         const result = await supabase.from("tasks").delete().match({'id': id});
+
     }
 
     return <>

@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3041908b-f5cd-45ca-a97a-e00c1658b201" name="Changes" comment="Adding Task with buttons working">
+      <change afterPath="$PROJECT_DIR$/npm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/Areas.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddTask/AddTaskForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTask/AddTaskForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddTask/AddTaskModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTask/AddTaskModal.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Navbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/Today.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Today.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/Account.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Account.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/login.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/login.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +22,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="tsconfig.json" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -72,7 +77,9 @@
       <workItem from="1674583306330" duration="3138000" />
       <workItem from="1674859805703" duration="5790000" />
       <workItem from="1675126468355" duration="7195000" />
-      <workItem from="1675193054942" duration="4360000" />
+      <workItem from="1675193054942" duration="5732000" />
+      <workItem from="1675469376183" duration="99000" />
+      <workItem from="1675469497049" duration="4910000" />
     </task>
     <servers />
   </component>

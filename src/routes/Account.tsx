@@ -1,12 +1,12 @@
-import { AuthSession } from '@supabase/supabase-js'
-import {Component, createEffect, createSignal, onMount} from 'solid-js'
+import {AuthSession, User} from '@supabase/supabase-js'
+import {createSignal, onMount} from 'solid-js'
 import { supabase } from '../supabase-client'
 
 interface Props {
     session: AuthSession;
 }
 
-const Account: Component<Props> = ({ session }) => {
+export default function Account(session: AuthSession | null){
     const [loading, setLoading] = createSignal(true)
     const [username, setUsername] = createSignal<string | null>(null)
     const [website, setWebsite] = createSignal<string | null>(null)
@@ -19,12 +19,12 @@ const Account: Component<Props> = ({ session }) => {
     const getProfile = async () => {
         try {
             setLoading(true)
-            const { user } = session
+            const user: User | undefined  = session?.user
 
             let { data, error, status } = await supabase
                 .from('profiles')
                 .select(`username, website, avatar_url`)
-                .eq('id', user.id)
+                .eq('id', user?.id)
                 .single()
 
             if (error && status !== 406) {
@@ -50,10 +50,10 @@ const Account: Component<Props> = ({ session }) => {
 
         try {
             setLoading(true)
-            const { user } = session
+            const user = session?.user
 
             const updates = {
-                id: user.id,
+                id: user?.id,
                 username: username(),
                 website: website(),
                 avatar_url: avatarUrl(),
@@ -77,7 +77,7 @@ const Account: Component<Props> = ({ session }) => {
     return (
         <div aria-live="polite">
             <form onSubmit={updateProfile} class="form-widget">
-                <div>Email: {session.user.email}</div>
+                <div>Email: {session?.user.email}</div>
                 <div>
                     <label for="username">Name</label>
                     <input
@@ -109,4 +109,3 @@ const Account: Component<Props> = ({ session }) => {
     )
 }
 
-export default Account

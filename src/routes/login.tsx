@@ -27,7 +27,7 @@ export default function Auth() {
     return (
         <>
                 <form class="form-widget" onSubmit={handleOtpLogin}>
-                  <div class="h-full bg-slate-800 w-full py-16 px-4">
+                  <div class="h-full w-full py-16 px-4">
                 <div class="flex flex-col items-center justify-center">
                     <img src="src/routes/login" alt="logo"/> {/*TODO: Add Logo*/}
                         <div class="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-10 mt-16">
