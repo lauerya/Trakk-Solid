@@ -33,10 +33,10 @@ const App: Component = () => {
         }else {
             navigate("/login", { replace: true })
         }
-
-
     }
-  return (
+
+
+    return (
           <HopeProvider>
           <Navbar/>
               <div class="container" style={{padding: '50px 0 100px 0'}}>
@@ -46,6 +46,7 @@ const App: Component = () => {
                   <Route path={"/login"} component={Login}></Route>
                   <Route path={"/Areas"} component={Areas}></Route>
                   <Route path={"/logout"} data={logout}></Route>
+                  {/*<Route path={"/Account"} component={Account(session())}/>*/}
 
               </Routes>
               </div>
