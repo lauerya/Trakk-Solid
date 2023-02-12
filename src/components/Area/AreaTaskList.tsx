@@ -1,8 +1,8 @@
 import {useParams} from "@solidjs/router";
 import {createResource, For} from "solid-js";
-import {supabase} from "../supabase-client";
-import {Task} from "../types/main";
-import TaskComponent from "./TaskComponent";
+import {supabase} from "../../supabase-client";
+import {Task} from "../../types/main";
+import TaskComponent from "../TaskComponent";
 
 export default function AreaTaskList(){
     const params = useParams();

@@ -169,7 +169,7 @@ export function AddTaskForm(props: any) {
                                         <SelectListbox>
                                             <For each={areas()}>
                                                 {item => (
-                                                    <SelectOption value={item.id}>
+                                                    <SelectOption value={item?.id!}>
                                                         <SelectOptionText>{item.name}</SelectOptionText>
                                                         <SelectOptionIndicator />
                                                     </SelectOption>

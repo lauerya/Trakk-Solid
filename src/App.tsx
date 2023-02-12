@@ -8,8 +8,8 @@ import {Routes, Route, Router, Navigate, useNavigate} from "@solidjs/router"
 import Areas from "./routes/Areas";
 import Account from "./routes/Account";
 import {useGlobalContext} from "./state";
-import AreaTaskList from "./components/AreaTaskList";
-import AreaEdit from "./components/AreaEdit";
+import AreaTaskList from "./components/Area/AreaTaskList";
+import AreaEdit from "./components/Area/AreaEdit";
 
 const App: Component = () => {
     const {session, setSession } = useGlobalContext();

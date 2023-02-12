@@ -1,8 +1,8 @@
 import {createStore} from "solid-js/store";
-import {Area, Profile, Task} from "../types/main";
+import {Area, Profile, Task} from "../../types/main";
 import {createSignal, onMount} from "solid-js";
-import {supabase} from "../supabase-client";
-import {users, setUsers} from "../services/UserService";
+import {supabase} from "../../supabase-client";
+import {users, setUsers} from "../../services/UserService";
 export default function AreaCreate(){
   const [errorMessage, setErrorMessage] = createSignal<string>("")
   const [areaForm, setAreaForm] = createStore<Area>({

@@ -12,6 +12,7 @@ import {
     ModalHeader,
     ModalOverlay
 } from "@hope-ui/solid";
+import Overview from "../components/Overview";
 
 export default function Today() {
     const [toggleAddTask, setToggleAddTask] = createSignal(false);
@@ -23,8 +24,8 @@ export default function Today() {
     })
 
     return (
-        <>
-            <div>
+        <div>
+            <Overview></Overview>
                 <TaskList></TaskList>
                     <Show when={isOpen}>
                         <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
@@ -42,7 +43,6 @@ export default function Today() {
                         </Modal>
                     </Show>
                     <AddButton toggleTaskForm={onOpen}></AddButton>
-            </div>
-        </>
+        </div>
     )
 }
