@@ -45,7 +45,7 @@ createEffect(() => {
 
     return <>
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl">
+            <div class="mx-auto max-w-md">
         <div class="overflow-hidden bg-gray-300 shadow sm:rounded-md">
             <ul role="list" class="divide-y divide-gray-200">
 

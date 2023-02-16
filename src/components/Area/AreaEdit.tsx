@@ -1,7 +1,7 @@
 import {useParams} from "@solidjs/router";
 import {createResource, For, Resource} from "solid-js";
-import {supabase} from "../supabase-client";
-import {Area} from "../types/main";
+import {supabase} from "../../supabase-client";
+import {Area} from "../../types/main";
 
 export default function AreaEdit() {
     const params = useParams();
@@ -52,7 +52,7 @@ export default function AreaEdit() {
                                             <span class="ml-2 w-0 flex-1 truncate">repair_12-30-2021.pdf</span>
                                         </div>
                                         <div class="ml-4 flex-shrink-0">
-                                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            <a href="src/components/Area/AreaEdit#" class="font-medium text-indigo-600 hover:text-indigo-500">
                                                 Download
                                             </a>
                                         </div>
@@ -62,7 +62,7 @@ export default function AreaEdit() {
                                             <span class="ml-2 w-0 flex-1 truncate">inspection.pdf</span>
                                         </div>
                                         <div class="ml-4 flex-shrink-0">
-                                            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+                                            <a href="src/components/Area/AreaEdit#" class="font-medium text-indigo-600 hover:text-indigo-500">
                                                 Download
                                             </a>
                                         </div>

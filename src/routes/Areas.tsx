@@ -12,7 +12,7 @@ import {
     ModalHeader,
     ModalOverlay
 } from "@hope-ui/solid";
-import AreaCreate from "../components/AreaCreate";
+import AreaCreate from "../components/Area/AreaCreate";
 
 export default function Areas() {
     const {areas, setAreas } = useGlobalContext();
