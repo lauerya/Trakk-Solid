@@ -31,7 +31,7 @@ export function AddTaskForm(props: any) {
         frequency: 0,
         frequencyType: "",
         description: "",
-        user_id: 'ce6ce087-f31c-40a2-896a-d8352b1ec577',
+        user_id: '',
         completed: false
     });
 

@@ -1,26 +1,29 @@
 import {AuthSession, User} from '@supabase/supabase-js'
 import {createSignal, onMount} from 'solid-js'
 import { supabase } from '../supabase-client'
-
+import {useGlobalContext} from "../state";
 interface Props {
     session: AuthSession;
 }
 
-export default function Account(session: AuthSession | null){
+export default function Account(){
     const [loading, setLoading] = createSignal(true)
     const [username, setUsername] = createSignal<string | null>(null)
     const [website, setWebsite] = createSignal<string | null>(null)
     const [avatarUrl, setAvatarUrl] = createSignal<string | null>(null)
+    const {session, setSession } = useGlobalContext();
 
     onMount(() => {
         getProfile();
     })
 
     const getProfile = async () => {
+
         try {
             setLoading(true)
-            const user: User | undefined  = session?.user
+            const user: User | undefined  = session()?.user
 
+            console.log(JSON.stringify(user))
             let { data, error, status } = await supabase
                 .from('profiles')
                 .select(`username, website, avatar_url`)
@@ -50,7 +53,7 @@ export default function Account(session: AuthSession | null){
 
         try {
             setLoading(true)
-            const user = session?.user
+            const user = session()?.user
 
             const updates = {
                 id: user?.id,
@@ -76,8 +79,8 @@ export default function Account(session: AuthSession | null){
 
     return (
         <div aria-live="polite">
-            <form onSubmit={updateProfile} class="form-widget">
-                <div>Email: {session?.user.email}</div>
+            <form onSubmit={updateProfile} class="form">
+                <div>Email: {session()?.user.email}</div>
                 <div>
                     <label for="username">Name</label>
                     <input

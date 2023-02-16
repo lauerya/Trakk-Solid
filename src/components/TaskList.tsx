@@ -13,7 +13,7 @@ function TaskList() {
     })
 
 createEffect(() => {
-    console.log(JSON.stringify(taskList))
+    console.log("Task List Count: "+ taskList()?.length)
 })
     const updateTask = async (e: Event) => {
         e.preventDefault()
@@ -39,7 +39,6 @@ createEffect(() => {
             console.log(error)
             throw error
         }
-        console.log(JSON.stringify(data))
         setTaskList(data);
         return data
     }
