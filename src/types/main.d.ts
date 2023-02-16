@@ -14,8 +14,8 @@ interface Task {
 }
 
 interface Area {
-    id: string
-    created_at: string;
+    id?: string
+    created_at?: string;
     name: string;
     image: string;
     description: string;

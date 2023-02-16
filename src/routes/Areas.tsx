@@ -2,9 +2,21 @@ import {useGlobalContext} from "../state";
 import {Area} from "../types/main";
 import {supabase} from "../supabase-client";
 import {createEffect, onMount} from "solid-js";
+import {
+    Button,
+    createDisclosure,
+    Modal,
+    ModalBody, ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay
+} from "@hope-ui/solid";
+import AreaCreate from "../components/AreaCreate";
 
 export default function Areas() {
     const {areas, setAreas } = useGlobalContext();
+    const { isOpen, onOpen, onClose } = createDisclosure()
 
     onMount(() => {
         getAreas().then(() => console.log(`areas fetched: ${JSON.stringify(areas())}`))
@@ -28,9 +40,21 @@ export default function Areas() {
     return (
         <>
             <div class="container bg-white">
-                Areas Works! {JSON.stringify(areas())}
+                <button onclick={onOpen} >Create New Area</button>
             </div>
-
+            <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalCloseButton />
+                    <ModalHeader>Create New Area</ModalHeader>
+                    <ModalBody>
+                        <AreaCreate></AreaCreate>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
 
             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {areas()?.map((area) => (
