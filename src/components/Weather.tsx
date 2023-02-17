@@ -24,6 +24,7 @@ export default function Weather(){
             return;
         }
         let apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&APPID=${import.meta.env.VITE_WEATHER_SERVICE_API_KEY}`;
+
         fetch(apiURL)
             .then(response => response.json())
             .then((data)=> {
