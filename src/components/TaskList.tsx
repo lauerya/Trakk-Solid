@@ -1,25 +1,27 @@
 import {createEffect, createSignal, For} from "solid-js";
 import {supabase} from "../supabase-client";
 import TaskComponent from "./TaskComponent";
-import AddButton from "./AddTask/AddButton";
 import {Task} from "../types/main";
+import {useGlobalContext} from "../state";
+
 
 function TaskList() {
     const [loading, setLoading] = createSignal(true)
     const [taskList, setTaskList] = createSignal<Task[] | null>(null)
+    const {tasks, setTasks} = useGlobalContext();
 
     createEffect(() => {
         getTaskList().then(r => console.log("Task List Fetching Done"))
     })
 
 createEffect(() => {
-    console.log("Task List Count: "+ taskList()?.length)
+    console.log("Task List Count: "+ tasks()?.length)
 })
     const updateTask = async (e: Event) => {
         e.preventDefault()
         try {
             setLoading(true)
-            const updates = { taskList }
+            const updates = { tasks }
             let { error } = await supabase.from('task').update(updates)
             if (error) {
                 throw error
@@ -33,13 +35,17 @@ createEffect(() => {
         }
     }
 
+    const refreshTaskList = () => {
+        getTaskList().then(r => console.log("task list refreshed"));
+
+    }
     const getTaskList = async (): Promise<Task[]> => {
         const {data, error} = await supabase.from('tasks').select()
         if (error){
             console.log(error)
             throw error
         }
-        setTaskList(data);
+        setTasks(data);
         return data
     }
 
@@ -49,9 +55,9 @@ createEffect(() => {
         <div class="overflow-hidden bg-gray-300 shadow sm:rounded-md">
             <ul role="list" class="divide-y divide-gray-200">
 
-                <For each={taskList()}>
+                <For each={tasks()}>
                     {(todo: Task) =>
-                        <TaskComponent todo={todo} setTodos={setTaskList} />
+                        <TaskComponent todo={todo} refreshTaskList={() => refreshTaskList()} />
                     }
                 </For>
             </ul>
