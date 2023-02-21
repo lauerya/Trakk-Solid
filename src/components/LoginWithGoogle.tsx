@@ -1,26 +1,35 @@
-import {Component} from "solid-js";
+import {Component, createEffect, createSignal} from "solid-js";
 import {supabase} from "../supabase-client";
 import Auth from "../routes/login";
 
 const LoginWithGoogle: Component = () => {
+    const [url, setUrl] = createSignal('');
 
+    createEffect(() => {
+        console.log("The URL is now", url());
+    });
+
+    createEffect(() => {
+        console.log("STARTING")
+        setUrl(getURL)
+    })
     async function signInWithGoogle() {
+        let url = getURL()
+        console.log(url)
+
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: getURL()
+                //redirectTo: url
             }
         })
+        console.log(data)
     }
     const getURL = () => {
-        console.log(import.meta.url)
-        console.log(import.meta.env.BASE_URL)
-        console.log(JSON.stringify(import.meta.env))
-
         let url =
             import.meta.url ?? // Set this to your site URL in production env.
-            import.meta.env.BASE_URL ?? // Automatically set by Vercel.
-            'http://localhost:3000/';
+            import.meta.env.BASE_URL ;
+        console.log(url);
         // Make sure to include `https://` when not localhost.
         url = url.includes('http') ? url : `https://${url}`;
         // Make sure to including trailing `/`.

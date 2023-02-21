@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3041908b-f5cd-45ca-a97a-e00c1658b201" name="Changes" comment="Adding Task with buttons working">
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LoginWithGoogle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginWithGoogle.tsx" afterDir="false" />
     </list>
@@ -41,10 +40,10 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/ryanlauer/Documents/GitHub/Trakk-Solid&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Documents/Trakk-Solid&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;/Users/ryanlauer/Documents/GitHub/Trakk-Solid/node_modules/typescript/lib&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\PC\\Documents\\Trakk-Solid\\node_modules\\typescript\\lib&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -76,6 +75,8 @@
       <workItem from="1675469497049" duration="6928000" />
       <workItem from="1675580046834" duration="23083000" />
       <workItem from="1676223363387" duration="4692000" />
+      <workItem from="1676930146301" duration="2001000" />
+      <workItem from="1676942942940" duration="1989000" />
     </task>
     <servers />
   </component>
