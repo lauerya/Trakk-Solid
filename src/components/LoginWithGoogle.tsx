@@ -20,7 +20,8 @@ const LoginWithGoogle: Component = () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                //redirectTo: url
+                redirectTo: url,
+                skipBrowserRedirect: true
             }
         })
         console.log(data)
