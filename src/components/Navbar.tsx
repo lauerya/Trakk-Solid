@@ -13,27 +13,29 @@ import {
     ModalOverlay
 } from "@hope-ui/solid";
 import {AddTaskForm} from "./AddTask/AddTaskForm";
-import { Routes, Route } from "@solidjs/router"
-import Today from "../routes/Today";
-import Account from "../routes/Account";
-import {AuthSession} from "@supabase/supabase-js";
 import {supabase} from "../supabase-client";
-import Auth from "../routes/login";
+import {useGlobalContext} from "../state";
+import {AuthChangeEvent, Session} from "@supabase/supabase-js";
 
 function Navbar() {
+    const {session, setSession } = useGlobalContext();
+
     const toggle = () => setToggleAddTask(!toggleAddTask())
     const [toggleAddTask, setToggleAddTask] = createSignal(false);
     const { isOpen, onOpen, onClose } = createDisclosure()
-    const [session, setSession] = createSignal<AuthSession | null>(null)
+
+    createEffect(() => {
+        console.log("The Navbar session is now", session());
+    });
 
     createEffect(() => {
         console.log(JSON.stringify(session))
-        supabase.auth.getSession().then(({ data: { session } }) => {
-            setSession(session)
-        })
+        supabase.auth.getSession().then(({data: {session: Session}}) => {
+            if (session !== undefined) {setSession(session)}
+        });
 
-        supabase.auth.onAuthStateChange((_event, session) => {
-            setSession(session)
+        supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session) => {
+            setSession(session as Session)
         })
     })
 

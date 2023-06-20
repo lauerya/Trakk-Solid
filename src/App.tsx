@@ -1,28 +1,20 @@
 import { Component, createEffect, createSignal } from 'solid-js'
 import { supabase } from './supabase-client'
-import { AuthSession } from '@supabase/supabase-js'
 import Login from './routes/login'
-import TaskList from './components/TaskList'
 import Navbar from "./components/Navbar";
 import Today from "./routes/Today";
 import {HopeProvider} from "@hope-ui/solid";
 import {Routes, Route, Router, Navigate, useNavigate} from "@solidjs/router"
-import Account from "./routes/Account";
 import Areas from "./routes/Areas";
+import Account from "./routes/Account";
+import {useGlobalContext} from "./state";
+import AreaTaskList from "./components/Area/AreaTaskList";
+import AreaEdit from "./components/Area/AreaEdit";
 
 const App: Component = () => {
-  const [session, setSession] = createSignal<AuthSession | null>(null)
+    const {session, setSession } = useGlobalContext();
+
     const navigate = useNavigate()
-
-  createEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  })
 
     async function logout() {
         var result = await supabase.auth.signOut();
@@ -35,18 +27,19 @@ const App: Component = () => {
         }
     }
 
-
     return (
           <HopeProvider>
           <Navbar/>
               <div class="container" style={{padding: '50px 0 100px 0'}}>
-                  {!session() ? <Navigate href={"/login"}/> : <Navigate href={"/Today"}/>}
               <Routes>
                   <Route path={"/Today"} component={Today}></Route>
+                  <Route path={"/Areas/:areaId"} component={AreaTaskList}></Route>
+                  <Route path={"/AreaEdit/:areaId"} component={AreaEdit}></Route>
+
                   <Route path={"/login"} component={Login}></Route>
                   <Route path={"/Areas"} component={Areas}></Route>
                   <Route path={"/logout"} data={logout}></Route>
-                  {/*<Route path={"/Account"} component={Account(session())}/>*/}
+                  <Route path={"/Account"} component={Account}/>
 
               </Routes>
               </div>

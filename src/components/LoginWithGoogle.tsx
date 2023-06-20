@@ -1,14 +1,42 @@
-import {Component} from "solid-js";
+import {Component, createEffect, createSignal} from "solid-js";
 import {supabase} from "../supabase-client";
+import Auth from "../routes/login";
 
 const LoginWithGoogle: Component = () => {
+    const [url, setUrl] = createSignal('');
 
+    createEffect(() => {
+        console.log("The URL is now", url());
+    });
+
+    createEffect(() => {
+        console.log("STARTING")
+        setUrl(getURL)
+    })
     async function signInWithGoogle() {
+        let url = getURL()
+        console.log(url)
+
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
+            options: {
+                redirectTo: url,
+                skipBrowserRedirect: true
+            }
         })
+        console.log(data)
     }
-
+    const getURL = () => {
+        let url =
+            import.meta.url ?? // Set this to your site URL in production env.
+            import.meta.env.BASE_URL ;
+        console.log(url);
+        // Make sure to include `https://` when not localhost.
+        url = url.includes('http') ? url : `https://${url}`;
+        // Make sure to including trailing `/`.
+        url = url.charAt(url.length - 1) === '/' ? url : `${url}/`;
+        return url;
+    };
     async function signOutWithGoogle(){
         const { error } = await supabase.auth.signOut()
 

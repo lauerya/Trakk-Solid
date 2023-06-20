@@ -1,11 +1,99 @@
+import {useGlobalContext} from "../state";
+import {Area} from "../types/main";
+import {supabase} from "../supabase-client";
+import {createEffect, onMount} from "solid-js";
+import {
+    Button,
+    createDisclosure,
+    Modal,
+    ModalBody, ModalCloseButton,
+    ModalContent,
+    ModalFooter,
+    ModalHeader,
+    ModalOverlay
+} from "@hope-ui/solid";
+import AreaCreate from "../components/Area/AreaCreate";
+
 export default function Areas() {
+    const {areas, setAreas } = useGlobalContext();
+    const { isOpen, onOpen, onClose } = createDisclosure()
+
+    onMount(() => {
+        getAreas().then(() => console.log(`areas fetched: ${JSON.stringify(areas())}`))
+    })
+    const getAreas = async (): Promise<Area[]> => {
+        if (areas() == undefined) {
+            const {data, error} = await supabase.from('areas').select('*')
+            console.log(JSON.stringify(data))
+            if (error) {
+                console.log(error);
+                throw error;
+            }
+
+            setAreas(data)
+            return data;
+        } else {
+            return areas() as Area[];
+        }
+    }
 
     return (
         <>
             <div class="container bg-white">
-                Areas Works!
-
+                <button onclick={onOpen} >Create New Area</button>
             </div>
+            <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalCloseButton />
+                    <ModalHeader>Create New Area</ModalHeader>
+                    <ModalBody>
+                        <AreaCreate></AreaCreate>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button onClick={onClose}>Close</Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+
+            <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                {areas()?.map((area) => (
+                    <li class="col-span-1 divide-y divide-gray-200 rounded-lg bg-white shadow">
+                        <div class="flex w-full items-center justify-between space-x-6 p-6">
+                            <div class="flex-1 truncate">
+                                <div class="flex items-center space-x-3">
+                                    <h3 class="truncate text-sm font-medium text-gray-900">{area.name}</h3>
+                                    <span class="inline-block flex-shrink-0 rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+                  {area.house_id}
+                </span>
+                                </div>
+                                <p class="mt-1 truncate text-sm text-gray-500">{area.description}</p>
+                            </div>
+                            <img class="h-16 w-32 flex-shrink-0 rounded-md bg-gray-300" src={area.image} alt="" />
+                        </div>
+                        <div>
+                            <div class="-mt-px flex divide-x divide-gray-200">
+                                <div class="flex w-0 flex-1">
+                                    <a
+                                        href={`Areas/${area.id}`}
+                                        class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
+                                    >
+                                        <span class="ml-3">Tasks for {area.name}</span>
+                                    </a>
+                                </div>
+                                <div class="-ml-px flex w-0 flex-1">
+                                    <a
+                                        href={`AreaEdit/${area.id}`}
+                                        class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
+                                    >
+                                        <span class="ml-3">Edit {area.name}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                ))}
+            </ul>
         </>
     )
 }// <div class="flex-1 xl:overflow-y-auto">

@@ -1,25 +1,27 @@
 import {createEffect, createSignal, For} from "solid-js";
 import {supabase} from "../supabase-client";
 import TaskComponent from "./TaskComponent";
-import AddButton from "./AddTask/AddButton";
 import {Task} from "../types/main";
+import {useGlobalContext} from "../state";
+
 
 function TaskList() {
     const [loading, setLoading] = createSignal(true)
     const [taskList, setTaskList] = createSignal<Task[] | null>(null)
+    const {tasks, setTasks} = useGlobalContext();
 
     createEffect(() => {
         getTaskList().then(r => console.log("Task List Fetching Done"))
     })
 
 createEffect(() => {
-    console.log(JSON.stringify(taskList))
+    console.log("Task List Count: "+ tasks()?.length)
 })
     const updateTask = async (e: Event) => {
         e.preventDefault()
         try {
             setLoading(true)
-            const updates = { taskList }
+            const updates = { tasks }
             let { error } = await supabase.from('task').update(updates)
             if (error) {
                 throw error
@@ -33,26 +35,29 @@ createEffect(() => {
         }
     }
 
+    const refreshTaskList = () => {
+        getTaskList().then(r => console.log("task list refreshed"));
+
+    }
     const getTaskList = async (): Promise<Task[]> => {
         const {data, error} = await supabase.from('tasks').select()
         if (error){
             console.log(error)
             throw error
         }
-        console.log(JSON.stringify(data))
-        setTaskList(data);
+        setTasks(data);
         return data
     }
 
     return <>
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl">
+            <div class="mx-auto max-w-md">
         <div class="overflow-hidden bg-gray-300 shadow sm:rounded-md">
             <ul role="list" class="divide-y divide-gray-200">
 
-                <For each={taskList()}>
+                <For each={tasks()}>
                     {(todo: Task) =>
-                        <TaskComponent todo={todo} setTodos={setTaskList} />
+                        <TaskComponent todo={todo} refreshTaskList={() => refreshTaskList()} />
                     }
                 </For>
             </ul>
