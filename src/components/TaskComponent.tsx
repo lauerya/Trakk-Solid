@@ -40,7 +40,7 @@ export default function TaskComponent(props: any) {
                         <p class="truncate text-sm font-medium text-indigo-600">{props.todo.name}</p>
                         <div class="ml-2 flex flex-shrink-0">
                             <p class="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                                {() => getEffort(props.todo.effort)}
+                                {getEffort(props.todo.effort)}
                             </p>
                         </div>
                     </div>
