@@ -1,5 +1,5 @@
 import {Component, createEffect, createSignal} from "solid-js";
-import {supabase} from "../supabase-client";
+import {supabase} from "~/supabase-client";
 import Auth from "../routes/login";
 
 const LoginWithGoogle: Component = () => {
@@ -20,7 +20,8 @@ const LoginWithGoogle: Component = () => {
         const { data, error } = await supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                //redirectTo: url
+                redirectTo: url,
+                skipBrowserRedirect: true
             }
         })
         console.log(data)

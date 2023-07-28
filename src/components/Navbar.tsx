@@ -1,7 +1,6 @@
 import {A, useLocation, useNavigate} from "@solidjs/router";
 import AddButton from "./AddTask/AddButton";
 import {createEffect, createSignal, Show} from "solid-js";
-import {AddTaskModal} from "./AddTask/AddTaskModal";
 import {
     Button, createDisclosure,
     Modal,
@@ -13,8 +12,8 @@ import {
     ModalOverlay
 } from "@hope-ui/solid";
 import {AddTaskForm} from "./AddTask/AddTaskForm";
-import {supabase} from "../supabase-client";
-import {useGlobalContext} from "../state";
+import {supabase} from "~/supabase-client";
+import {useGlobalContext} from "~/state";
 import {AuthChangeEvent, Session} from "@supabase/supabase-js";
 
 function Navbar() {
@@ -31,7 +30,7 @@ function Navbar() {
     createEffect(() => {
         console.log(JSON.stringify(session))
         supabase.auth.getSession().then(({data: {session: Session}}) => {
-            if (session !== undefined) {setSession(session)}
+            if (session !== undefined) {setSession(session as any)}
         });
 
         supabase.auth.onAuthStateChange((_event: AuthChangeEvent, session) => {
@@ -71,7 +70,7 @@ function Navbar() {
                     <Show when={session() != undefined && session() != null}>
                     <AddButton toggleTaskForm={onOpen}></AddButton>
                     </Show>
-                    <Show when={isOpen}>
+                    <Show when={isOpen()}>
                         <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
                             <ModalOverlay />
                             <ModalContent>

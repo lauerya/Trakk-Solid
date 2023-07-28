@@ -1,8 +1,8 @@
 import {createEffect, createSignal, For, onMount} from "solid-js";
-import {supabase} from "../../supabase-client";
+import {supabase} from "~/supabase-client";
 import {User, UserResponse} from "@supabase/supabase-js";
 import {createStore} from "solid-js/store";
-import {EffortType} from "../../types/main";
+import {EffortType} from "~/types/main";
 import { VsAdd } from 'solid-icons/vs'
 
 import {
@@ -15,7 +15,7 @@ import {
     SelectOptionIndicator, SelectOptionText, SelectPlaceholder,
     SelectTrigger, SelectValue
 } from "@hope-ui/solid";
-import {Area, Profile, Task} from "../../types/main";
+import {Area, Profile, Task} from "~/types/main";
 
 export function AddTaskForm(props: any) {
     const [user, setUser] = createSignal<User | null>();

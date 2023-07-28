@@ -1,113 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="3041908b-f5cd-45ca-a97a-e00c1658b201" name="Changes" comment="Adding Task with buttons working">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginWithGoogle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginWithGoogle.tsx" afterDir="false" />
-    </list>
+    <list default="true" id="24e8f256-2592-4091-a935-a2054250a1fc" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="tsconfig.json" />
-        <option value="TypeScript File" />
-        <option value="TypeScript JSX File" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2KN8IGk7l1FHiHLHt9ErdGcyG09" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2RUVYtfUjMqECm797Qi2mwccXXr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/PC/Documents/Trakk-Solid&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\PC\\Documents\\Trakk-Solid\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "C:/Users/PC/Documents/Trakk-Solid-Start/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "ts.external.directory.path": "C:\\Users\\PC\\Documents\\Trakk-Solid-Start\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\Documents\Trakk-Solid-Start\src" />
+      <recent name="C:\Users\PC\Documents\Trakk-Solid-Start\src\routes" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/Area" />
-      <recent name="$PROJECT_DIR$/src/components/AddTask" />
-      <recent name="$PROJECT_DIR$/src/assets" />
-      <recent name="$PROJECT_DIR$/src/routes" />
-      <recent name="$PROJECT_DIR$" />
+      <recent name="C:\Users\PC\Documents\Trakk-Solid-Start" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3041908b-f5cd-45ca-a97a-e00c1658b201" name="Changes" comment="" />
-      <created>1673803599472</created>
+      <changelist id="24e8f256-2592-4091-a935-a2054250a1fc" name="Changes" comment="" />
+      <created>1687304697510</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1673803599472</updated>
-      <workItem from="1673803601780" duration="19352000" />
-      <workItem from="1673902806951" duration="3410000" />
-      <workItem from="1674405104037" duration="14761000" />
-      <workItem from="1674583306330" duration="3138000" />
-      <workItem from="1674859805703" duration="5790000" />
-      <workItem from="1675126468355" duration="7195000" />
-      <workItem from="1675193054942" duration="5732000" />
-      <workItem from="1675469376183" duration="99000" />
-      <workItem from="1675469497049" duration="6928000" />
-      <workItem from="1675580046834" duration="23083000" />
-      <workItem from="1676223363387" duration="4692000" />
-      <workItem from="1676930146301" duration="2001000" />
-      <workItem from="1676942942940" duration="1989000" />
+      <updated>1687304697510</updated>
+      <workItem from="1687304699222" duration="1340000" />
+      <workItem from="1687306115628" duration="8645000" />
+      <workItem from="1690509460375" duration="2564000" />
+      <workItem from="1690512075732" duration="6360000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Adding Task with buttons working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Task with buttons working" />
   </component>
 </project>

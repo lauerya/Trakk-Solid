@@ -1,7 +1,7 @@
 import {createSignal, onMount, Show} from "solid-js";
 import TaskList from "../components/TaskList";
 import AddButton from "../components/AddTask/AddButton";
-import {AddTaskForm} from "../components/AddTask/AddTaskForm";
+import {AddTaskForm} from "~/components/AddTask/AddTaskForm";
 import {
     Button, createDisclosure,
     Modal,

@@ -1,23 +1,67 @@
 import {createStore} from "solid-js/store";
 import {Area, Profile, Task} from "../../types/main";
-import {createSignal, onMount} from "solid-js";
+import {createSignal, onMount, Show} from "solid-js";
 import {supabase} from "../../supabase-client";
-import {users, setUsers} from "../../services/UserService";
+import {Button} from "@hope-ui/solid";
+import {User, UserResponse} from "@supabase/supabase-js";
 export default function AreaCreate(){
+  let fileInputRef: any = null;
   const [errorMessage, setErrorMessage] = createSignal<string>("")
+  const [user, setUser] = createSignal<User | null>();
   const [areaForm, setAreaForm] = createStore<Area>({
     name: "",
     description: "",
+    created_at: "",
     user_id: '',
+    size: '',
     image: '',
-    house_id: 0,
+    house_id: 1 //TODO GEt house id from user's house
   });
 
+  const getUserId = async (): Promise<any> => {
+    const userData = user();
+    if (userData == null) {
+      const userResponse: UserResponse = await supabase.auth.getUser();
+      if (userResponse != null) {
+        console.log(userResponse.data.user);
+        setUser(userResponse.data.user);
+        return userResponse.data.user?.id;
+      }
+    } else {
+      console.log(userData.email);
+      setUser(userData)
+      return userData.id;
+    }
+  };
 
-  function addNewArea() {
+  async function addNewArea() {
+    var userId = await getUserId();
+    handleImageChange();
+    var areaFormToSend = {
+      name: areaForm.name,
+      description: areaForm.description,
+        created_at: new Date().toISOString(),
+        user_id: userId,
+        image: areaForm.image,
+        house_id: areaForm.house_id,
+    }
+    const {data, error} = await supabase.from('areas').insert(areaFormToSend).select()
 
   }
 
+  function handleImageChange(){
+    const avatarFile = fileInputRef.files[0]
+    const fileName = `${areaForm.name}-${areaForm.user_id}-${Date.now().toString(10)}`
+    const { data, error } = supabase
+        .storage
+        .from('avatars')
+        .upload(`public/${fileName}`, avatarFile, {
+          cacheControl: '3600',
+          upsert: false
+        })
+
+    setAreaForm({image: `public/${fileName}`})
+  }
   const updateFormField = (fieldName: string) => (event: Event) => {
     let inputElement: HTMLInputElement;
     if (typeof event.currentTarget !== 'undefined') {
@@ -32,17 +76,17 @@ export default function AreaCreate(){
       });
     }
 
-    console.log(areaForm.name);
+    console.log(areaForm);
   };
   return (
     <>
 
-      <form onSubmit={() => addNewArea()} class="space-y-8 divide-y divide-gray-200">
+      <form class="space-y-8 divide-y divide-gray-200 bg-gray-200 p-5">
         <div class="space-y-8 divide-y divide-gray-200">
           <div>
             <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               <div class="sm:col-span-4">
-                <label for="areaName" class="block text-sm font-medium text-gray-700">
+                <label for="areaName" class="block text-sm font-medium text-black">
                   Area Name
                 </label>
                 <div class="mt-1 flex rounded-md shadow-sm">
@@ -51,13 +95,13 @@ export default function AreaCreate(){
                       type="text"
                       name="areaName"
                       id="areaName"
-                      class="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      class="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black"
                   />
                 </div>
               </div>
 
               <div class="sm:col-span-6">
-                <label for="description" class="block text-sm font-medium text-gray-700">
+                <label for="description" class="block text-sm font-medium text-black">
                   Description
                 </label>
                 <div class="mt-1">
@@ -66,34 +110,31 @@ export default function AreaCreate(){
                     id="description"
                     name="description"
                     rows={3}
-                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black"
                 />
                 </div>
-                <p class="mt-2 text-sm text-gray-500">Any information about the area.</p>
+                <p class="mt-2 text-sm text-black">Any information about the area.</p>
               </div>
 
-              <div class="sm:col-span-6">
-                <label for="photo" class="block text-sm font-medium text-gray-700">
-                  Area Image
-                </label>
-                <div class="mt-1 flex items-center">
-                <span class="h-100 w-100 overflow-hidden rounded-md bg-gray-100">
- <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
-      width="100" height="100"
-      viewBox="0 0 50 50">
-<path d="M 0 5 L 0 45 L 50 45 L 50 5 Z M 2 7 L 48 7 L 48 33 L 37.320313 33 L 30.320313 28 L 24.414063 28 L 20.328125 23.914063 L 15.460938 24.890625 L 11.15625 18.429688 L 2 27.585938 Z M 37.5 13 C 35.027344 13 33 15.027344 33 17.5 C 33 19.972656 35.027344 22 37.5 22 C 39.972656 22 42 19.972656 42 17.5 C 42 15.027344 39.972656 13 37.5 13 Z M 37.5 15 C 38.890625 15 40 16.109375 40 17.5 C 40 18.890625 38.890625 20 37.5 20 C 36.109375 20 35 18.890625 35 17.5 C 35 16.109375 36.109375 15 37.5 15 Z M 10.84375 21.570313 L 14.539063 27.109375 L 19.671875 26.085938 L 23.585938 30 L 29.679688 30 L 36.679688 35 L 48 35 L 48 43 L 2 43 L 2 30.414063 Z"></path>
-</svg>
-                </span>
-                  <button
-                      type="button"
-                      class="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    Change
-                  </button>
-                </div>
+              <input
+                  type="file"
+                  hidden
+                  ref={fileInputRef}
+                  accept="image/*"
+                  onChange={handleImageChange}
+              />
+              <Button
+                  onClick={() => fileInputRef.click()}
+
+              >
+                Select Image
+              </Button>
+              <Show when={fileInputRef?.files[0] != null}>
+                {fileInputRef.files[0]}
+                <img src={fileInputRef.files[0]} alt="area image" />
+              </Show>
               </div>
             </div>
-          </div>
 
           <div class="pt-8">
             <div>
@@ -102,22 +143,27 @@ export default function AreaCreate(){
             <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
 
               <div class="sm:col-span-3">
-                <label for="country" class="block text-sm font-medium text-gray-700">
+                <label for="size" class="block text-sm font-medium text-black">
                   Country
                 </label>
                 <div class="mt-1">
                   <select
-                      id="country"
+                      id="size"
                       name="country"
-                      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black"
+                      onChange={(e) => {
+                        updateFormField("size");
+                      }}
                   >
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
+                    <option>Small</option>
+                    <option>Medium</option>
+                    <option>Large</option>
                   </select>
                 </div>
               </div>
-
+              <Button type="submit" class="button btn btn-primary bg-blue-500" onClick={() => addNewArea()}>Create New
+                Area
+              </Button>
             </div>
           </div>
         </div>
