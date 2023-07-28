@@ -39,23 +39,6 @@ export default function Auth() {
                                 have account? <A href="javascript:void(0)"
                                                  class="hover:text-gray-500 focus:text-gray-500 focus:outline-none focus:underline hover:underline text-sm font-medium leading-none  text-gray-800 cursor-pointer"> Sign
                                     up here</A></p>
-                            <div>
-                                <label for="email">Email</label>
-                                <input
-                                    id="email"
-                                    class="inputField"
-                                    type="email"
-                                    placeholder="Your email"
-                                    value={email()}
-                                    onChange={(e) => setEmail(e.currentTarget.value)}
-                                />
-                            </div>
-                            <div>
-                                <button type="submit" class="button block" aria-live="polite">
-                                    {loading() ? <span>Loading</span> : <span>Send magic link</span>}
-                                </button>
-                            </div>
-
                             <div class="w-full flex items-center justify-between py-5">
                                 <hr class="w-full bg-gray-400"/>
                                     <p class="text-base font-medium leading-4 px-2.5 text-gray-400">OR</p>

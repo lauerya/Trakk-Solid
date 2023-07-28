@@ -1,5 +1,5 @@
 import {Component, createEffect, createSignal} from "solid-js";
-import {supabase} from "../supabase-client";
+import {supabase} from "~/supabase-client";
 import Auth from "../routes/login";
 
 const LoginWithGoogle: Component = () => {

@@ -1,7 +1,7 @@
 import {useGlobalContext} from "../state";
 import {Area} from "../types/main";
 import {supabase} from "../supabase-client";
-import {createEffect, onMount} from "solid-js";
+import {createEffect, onMount, Show} from "solid-js";
 import {
     Button,
     createDisclosure,
@@ -39,22 +39,28 @@ export default function Areas() {
 
     return (
         <>
-            <div class="container bg-white">
-                <button onclick={onOpen} >Create New Area</button>
+            <div class="container">
+                <button class={"btn btn-primary"} onclick={onOpen} >Add New Area</button>
             </div>
-            <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalCloseButton />
-                    <ModalHeader>Create New Area</ModalHeader>
-                    <ModalBody>
-                        <AreaCreate></AreaCreate>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                    </ModalFooter>
-                </ModalContent>
-            </Modal>
+            <Show when={isOpen()} fallback={<div></div>}>
+                <div class={"container sm p-10 m-2"}>
+                    <AreaCreate></AreaCreate>
+                </div>
+            </Show>
+
+            {/*<Modal size={"xl"} opened={isOpen()} onClose={onClose}>*/}
+            {/*    <ModalOverlay />*/}
+            {/*    <ModalContent>*/}
+            {/*        <ModalCloseButton />*/}
+            {/*        <ModalHeader>Create New Area</ModalHeader>*/}
+            {/*        <ModalBody>*/}
+            {/*            <AreaCreate></AreaCreate>*/}
+            {/*        </ModalBody>*/}
+            {/*        <ModalFooter>*/}
+            {/*            <Button onClick={onClose}>Close</Button>*/}
+            {/*        </ModalFooter>*/}
+            {/*    </ModalContent>*/}
+            {/*</Modal>*/}
 
             <ul role="list" class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {areas()?.map((area) => (

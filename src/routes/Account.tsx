@@ -1,7 +1,7 @@
 import {AuthSession, User} from '@supabase/supabase-js'
 import {createSignal, onMount} from 'solid-js'
-import { supabase } from '../supabase-client'
-import {useGlobalContext} from "../state";
+import { supabase } from '~/supabase-client'
+import {useGlobalContext} from "~/state";
 interface Props {
     session: AuthSession;
 }

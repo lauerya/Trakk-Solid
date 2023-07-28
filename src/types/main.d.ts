@@ -21,6 +21,7 @@ interface Area {
     description: string;
     house_id: number;
     user_id: string;
+    size: string;
 }
 
 interface House {

@@ -1,7 +1,7 @@
 import {useParams} from "@solidjs/router";
 import {createResource, For, Resource} from "solid-js";
-import {supabase} from "../../supabase-client";
-import {Area} from "../../types/main";
+import {supabase} from "~/supabase-client";
+import {Area} from "~/types/main";
 
 export default function AreaEdit() {
     const params = useParams();
@@ -17,6 +17,17 @@ export default function AreaEdit() {
             throw error;
         }
         return data;
+    }
+
+    async function uploadFile(){
+        const avatarFile = event.target.files[0]
+        const { data, error } = await supabase
+            .storage
+            .from('avatars')
+            .upload('public/avatar1.png', avatarFile, {
+                cacheControl: '3600',
+                upsert: false
+            })
     }
 
     let areaInfo: Resource<Area[]>;
