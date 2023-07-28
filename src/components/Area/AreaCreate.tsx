@@ -1,7 +1,7 @@
 import {createStore} from "solid-js/store";
-import {Area, Profile, Task} from "../../types/main";
+import {Area, Profile, Task} from "~/types/main";
 import {createSignal, onMount, Show} from "solid-js";
-import {supabase} from "../../supabase-client";
+import {supabase} from "~/supabase-client";
 import {Button} from "@hope-ui/solid";
 import {User, UserResponse} from "@supabase/supabase-js";
 export default function AreaCreate(){
@@ -12,13 +12,13 @@ export default function AreaCreate(){
     name: "",
     description: "",
     created_at: "",
-    user_id: '',
-    size: '',
+    user_id: "",
+    size: 'Small',
     image: '',
     house_id: 1 //TODO GEt house id from user's house
   });
 
-  const getUserId = async (): Promise<any> => {
+  async function getUserId() {
     const userData = user();
     if (userData == null) {
       const userResponse: UserResponse = await supabase.auth.getUser();
@@ -32,11 +32,29 @@ export default function AreaCreate(){
       setUser(userData)
       return userData.id;
     }
-  };
+  }
+
+  function validateForm() {
+    if (areaForm.name == "") {
+      setErrorMessage("Please enter a name for the area.")
+      return false;
+    }
+    if (areaForm.description == "") {
+        setErrorMessage("Please enter a description for the area.")
+        return false;
+    }
+    if (areaForm.size == "") {
+        setErrorMessage("Please enter a size for the area.")
+        return false;
+    }
+    return true;
+  }
 
   async function addNewArea() {
+    var validForm = validateForm();
+    if (!validForm) {return};
     var userId = await getUserId();
-    handleImageChange();
+    var imageUrl = handleImageChange();
     var areaFormToSend = {
       name: areaForm.name,
       description: areaForm.description,
@@ -45,22 +63,26 @@ export default function AreaCreate(){
         image: areaForm.image,
         house_id: areaForm.house_id,
     }
+    console.log("Area form to send: ", areaFormToSend)
     const {data, error} = await supabase.from('areas').insert(areaFormToSend).select()
-
+    console.log("Data: ", data)
   }
 
-  function handleImageChange(){
+  async function handleImageChange(): Promise<string | undefined> {
     const avatarFile = fileInputRef.files[0]
+    if (!avatarFile) {
+      return "";
+    }
     const fileName = `${areaForm.name}-${areaForm.user_id}-${Date.now().toString(10)}`
-    const { data, error } = supabase
+    const {data, error} = await supabase
         .storage
         .from('avatars')
-        .upload(`public/${fileName}`, avatarFile, {
+        .upload(`${fileName}`, avatarFile, {
           cacheControl: '3600',
           upsert: false
         })
-
-    setAreaForm({image: `public/${fileName}`})
+    console.log("Data: ", data)
+    setAreaForm({image: `${fileName}`})
   }
   const updateFormField = (fieldName: string) => (event: Event) => {
     let inputElement: HTMLInputElement;
@@ -75,8 +97,6 @@ export default function AreaCreate(){
         [fieldName]: event
       });
     }
-
-    console.log(areaForm);
   };
   return (
     <>
@@ -144,16 +164,14 @@ export default function AreaCreate(){
 
               <div class="sm:col-span-3">
                 <label for="size" class="block text-sm font-medium text-black">
-                  Country
+                  Area Size
                 </label>
                 <div class="mt-1">
                   <select
                       id="size"
-                      name="country"
+                      name="size"
                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm text-black"
-                      onChange={(e) => {
-                        updateFormField("size");
-                      }}
+                      onChange={updateFormField("size")}
                   >
                     <option>Small</option>
                     <option>Medium</option>
@@ -161,7 +179,7 @@ export default function AreaCreate(){
                   </select>
                 </div>
               </div>
-              <Button type="submit" class="button btn btn-primary bg-blue-500" onClick={() => addNewArea()}>Create New
+              <Button  class="button btn btn-primary bg-blue-500" onClick={() => addNewArea()}>Create New
                 Area
               </Button>
             </div>

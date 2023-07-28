@@ -29,7 +29,7 @@ export default function Overview(){
                             </div>
                         </div>
                     </A>
-                    <A href={"/Areas"} class="overflow-hidden rounded-lg bg-gray-300 shadow">
+                    <A href={"/AreaTasks"} class="overflow-hidden rounded-lg bg-gray-300 shadow">
                         <div class="p-5">
                             <div class="flex items-center">
                                 <div class="truncate text-sm font-medium text-gray-500">Areas</div>
@@ -48,7 +48,7 @@ export default function Overview(){
                             </div>
                         </div>
                     </A>
-                    <A href={"/Areas"} class="overflow-hidden rounded-lg bg-gray-300 shadow">
+                    <A href={"/AreaTasks"} class="overflow-hidden rounded-lg bg-gray-300 shadow">
                         <div class="p-5">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">

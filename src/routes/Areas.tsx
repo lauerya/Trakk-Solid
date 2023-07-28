@@ -13,6 +13,7 @@ import {
     ModalOverlay
 } from "@hope-ui/solid";
 import AreaCreate from "../components/Area/AreaCreate";
+import {A} from "@solidjs/router";
 
 export default function Areas() {
     const {areas, setAreas } = useGlobalContext();
@@ -35,6 +36,14 @@ export default function Areas() {
         } else {
             return areas() as Area[];
         }
+    }
+    function getImageUrl(imageName: string): string{
+        const { data } = supabase
+            .storage
+            .from('avatars')
+            .getPublicUrl(imageName);
+
+        return data.publicUrl;
     }
 
     return (
@@ -75,25 +84,25 @@ export default function Areas() {
                                 </div>
                                 <p class="mt-1 truncate text-sm text-gray-500">{area.description}</p>
                             </div>
-                            <img class="h-16 w-32 flex-shrink-0 rounded-md bg-gray-300" src={area.image} alt="" />
+                            <img class="h-16 w-32 flex-shrink-0 rounded-md bg-gray-300" src={getImageUrl(area.image)} alt="" />
                         </div>
                         <div>
                             <div class="-mt-px flex divide-x divide-gray-200">
                                 <div class="flex w-0 flex-1">
-                                    <a
-                                        href={`Areas/${area.id}`}
+                                    <A
+                                        href={`AreaTasks/${area.id}`}
                                         class="relative -mr-px inline-flex w-0 flex-1 items-center justify-center rounded-bl-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
                                     >
                                         <span class="ml-3">Tasks for {area.name}</span>
-                                    </a>
+                                    </A>
                                 </div>
                                 <div class="-ml-px flex w-0 flex-1">
-                                    <a
-                                        href={`AreaEdit/${area.id}`}
+                                    <A
+                                        href={`/AreaEdit/${area.id}`}
                                         class="relative inline-flex w-0 flex-1 items-center justify-center rounded-br-lg border border-transparent py-4 text-sm font-medium text-gray-700 hover:text-gray-500"
                                     >
                                         <span class="ml-3">Edit {area.name}</span>
-                                    </a>
+                                    </A>
                                 </div>
                             </div>
                         </div>
