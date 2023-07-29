@@ -14,9 +14,8 @@ import {
   Title,
 } from "solid-start";
 import "./root.css";
-import {GlobalContextProvider, useGlobalContext} from "~/state";
+import {GlobalContextProvider} from "~/state";
 import Navbar from "~/components/Navbar";
-import {HopeProvider, HopeThemeConfig} from "@hope-ui/solid";
 import {useNavigate} from "@solidjs/router";
 import {supabase} from "~/supabase-client";
 
@@ -29,26 +28,7 @@ export default function Root() {
 
 
   const navigate = useNavigate()
-  const config: HopeThemeConfig = {
-    initialColorMode: "dark",
-    lightTheme: {
-      colors: {
-        primary1: "#fefcff",
-        // ...
-        primary12: "#340c3b",
-      }
-    },
-    darkTheme: {
-      colors: {
-        primary1: "#2b2828",
-        // ...
-        primary12: "#fbecfc",
-      }
-    },
-    components: {
-      // Components base styles...
-    }
-  }
+
   async function logout() {
     var result = await supabase.auth.signOut();
     navigate("/login", { replace: true })
@@ -71,14 +51,10 @@ export default function Root() {
         <Suspense>
           <ErrorBoundary>
             <GlobalContextProvider>
-              <HopeProvider config={config}>
-
               <Navbar/>
             <Routes>
               <FileRoutes />
             </Routes>
-                </HopeProvider>
-
             </GlobalContextProvider>
           </ErrorBoundary>
         </Suspense>

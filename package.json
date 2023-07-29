@@ -15,11 +15,12 @@
     "vite": "^4.1.4"
   },
   "dependencies": {
-    "@hope-ui/solid": "^0.6.7",
+    "@digichanges/solid-multiselect": "^0.0.10",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
     "@supabase/supabase-js": "^2.26.0",
     "del": "^7.0.0",
+    "preline": "^1.9.0",
     "solid-icons": "^1.0.8",
     "solid-js": "^1.7.2",
     "solid-start": "^0.2.26",

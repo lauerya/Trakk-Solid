@@ -1,24 +1,19 @@
-import {createEffect, createSignal, For, onMount} from "solid-js";
+import {createEffect, createSignal, For, onMount, Show} from "solid-js";
 import {supabase} from "~/supabase-client";
 import {User, UserResponse} from "@supabase/supabase-js";
 import {createStore} from "solid-js/store";
 import {EffortType} from "~/types/main";
 import { VsAdd } from 'solid-icons/vs'
-import {
-    Button,
-    Input,
-    Select,
-    SelectContent, SelectIcon,
-    SelectListbox,
-    SelectOption,
-    SelectOptionIndicator, SelectOptionText, SelectPlaceholder,
-    SelectTrigger, SelectValue
-} from "@hope-ui/solid";
 import {Area, Profile, Task} from "~/types/main";
+import { MultiSelect } from '@digichanges/solid-multiselect';
+import {Option} from "@digichanges/solid-multiselect/dist/Option";
 
 export function AddTaskForm(props: any) {
     const [user, setUser] = createSignal<User | null>();
     const [areas, setAreas] = createSignal<Area[] | null>()
+    const [areaDisplays, setAreaDisplays] = createSignal<Option[]>()
+    const [effortTypeDisplays, setEffortTypeDisplays] = createSignal<Option[]>()
+
     const [users, setUsers] = createSignal<Profile[]>()
     const [errorMessage, setErrorMessage] = createSignal<string>("")
     const [effortTypes, setEffortTypes] = createSignal<EffortType[]>()
@@ -38,7 +33,12 @@ export function AddTaskForm(props: any) {
         completed: false,
         dueDate: new Date().toISOString()
     });
-
+    createEffect(() => {
+        setAreaDisplays(areas()?.map(area => area.name));
+    });
+    createEffect(() => {
+        setEffortTypeDisplays(effortTypes()?.map(effort => effort.effortName));
+    });
     onMount(async() => {
         await getAreas();
         await getProfiles();
@@ -147,7 +147,7 @@ export function AddTaskForm(props: any) {
                         <div class="sm:col-span-3">
                             <label for="task-name" class="block text-sm font-medium text-gray-700">Task</label>
                             <div class="mt-1">
-                                <Input value={taskForm.name} onChange={updateFormField("name")} type="text"
+                                <input value={taskForm.name} onChange={updateFormField("name")} type="text"
                                        name="first-name" id="task-name" autocomplete="task"
                                        class="block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
                             </div>
@@ -156,7 +156,7 @@ export function AddTaskForm(props: any) {
                         <div class="sm:col-span-3">
                             <label for="description" class="block text-sm font-medium text-gray-700">description</label>
                             <div class="mt-1">
-                                <Input value={taskForm.description} onChange={updateFormField("description")}
+                                <input value={taskForm.description} onChange={updateFormField("description")}
                                        type="text" name="description" id="description" autocomplete="description"
                                        class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
                             </div>
@@ -164,73 +164,22 @@ export function AddTaskForm(props: any) {
                         <div class="sm:col-span-3">
                             <label for="area" class="block text-sm font-medium text-gray-700">Area</label>
                             <div class="mt-1">
-                                <Select value={taskForm.areaId} onChange={updateFormField("areaId")}>
-                                    <SelectTrigger>
-                                        <SelectPlaceholder>Choose an area</SelectPlaceholder>
-                                        <SelectValue />
-                                        <SelectIcon />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectListbox>
-                                            <For each={areas()}>
-                                                {item => (
-                                                    <SelectOption value={item?.id!}>
-                                                        <SelectOptionText>{item.name}</SelectOptionText>
-                                                        <SelectOptionIndicator />
-                                                    </SelectOption>
-                                                )}
-                                            </For>
-                                        </SelectListbox>
-                                    </SelectContent>
-                                </Select>
-                                </div>
+                                <Show when={areaDisplays() != null && areaDisplays() != undefined}>
+                                    <MultiSelect options={areaDisplays()!} selectionLimit={1}/>
+                                </Show>
+                            </div>
                         </div>
                             <div class="sm:col-span-3">
                                 <label for="effortType" class="block text-sm font-medium text-gray-700">Effort?</label>
                                 <div class={"mt-1"}>
-                                <Select value={taskForm.effort} onChange={updateFormField("effort")}>
-                                    <SelectTrigger>
-                                        <SelectPlaceholder>How much effort?</SelectPlaceholder>
-                                        <SelectValue />
-                                        <SelectIcon />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectListbox>
-                                            <For each={effortTypes()}>
-                                                {item => (
-                                                    <SelectOption value={item.effortName}>
-                                                        <SelectOptionText>{item.effortName}</SelectOptionText>
-                                                        <SelectOptionIndicator />
-                                                    </SelectOption>
-                                                )}
-                                            </For>
-                                        </SelectListbox>
-                                    </SelectContent>
-                                </Select>
+                                    <Show when={effortTypes() != null && effortTypes() != undefined}>
+                                    <MultiSelect options={effortTypeDisplays()!} onSelect={() => updateFormField("effort")} selectionLimit={1}/>
+                                    </Show>
                                 </div>
                         </div>
                         <div class="sm:col-span-3">
                             <label for="area" class="block text-sm font-medium text-gray-700">Assigned To</label>
                             <div class="mt-1">
-                                <Select value={taskForm.assignedTo} onChange={updateFormField("assignedTo")}>
-                                    <SelectTrigger>
-                                        <SelectPlaceholder>Choose a User</SelectPlaceholder>
-                                        <SelectValue/>
-                                        <SelectIcon/>
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectListbox>
-                                            <For each={users()}>
-                                                {item => (
-                                                    <SelectOption value={item.username}>
-                                                        <SelectOptionText>{item.username}</SelectOptionText>
-                                                        <SelectOptionIndicator/>
-                                                    </SelectOption>
-                                                )}
-                                            </For>
-                                        </SelectListbox>
-                                    </SelectContent>
-                                </Select>
                                 <div class="sm:col-span-3">
                                     <label for="dueDate" //TODO: Figure out how the datepicker can be above modal.
                                            class="block text-sm font-medium text-gray-700">Due Date</label>
@@ -254,12 +203,12 @@ export function AddTaskForm(props: any) {
                         </div>
                     </div>
                 </form>
-    <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
+    <button type="button" onClick={async (e: Event) => {
         await addNewTask();
     }}
             class="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-        Add Task
-    </Button>
+        Add Task<VsAdd></VsAdd>
+    </button>
         </>
 
 

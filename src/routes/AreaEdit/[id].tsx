@@ -2,7 +2,6 @@ import {createStore} from "solid-js/store";
 import {Area, Profile, Task} from "../../types/main";
 import {createSignal, onMount, Show} from "solid-js";
 import {supabase} from "../../supabase-client";
-import {Button} from "@hope-ui/solid";
 import {User, UserResponse} from "@supabase/supabase-js";
 import {useParams} from "@solidjs/router";
 
@@ -167,12 +166,12 @@ export default function AreaEdit(){
                                 accept="image/*"
                                 onChange={handleImageChange}
                             />
-                            <Button
+                            <button
                                 onClick={() => fileInputRef.click()}
 
                             >
                                 Select Image
-                            </Button>
+                            </button>
                             <Show when={fileInputRef?.files[0] != null}>
                                 {fileInputRef.files[0]}
                                 <img src={fileInputRef.files[0]} alt="area image" />
@@ -203,9 +202,9 @@ export default function AreaEdit(){
                                     </select>
                                 </div>
                             </div>
-                            <Button  class="button btn btn-primary bg-blue-500" onClick={() => addNewArea()}>Create New
+                            <button  class="button btn btn-primary bg-blue-500" onClick={() => addNewArea()}>Create New
                                 Area
-                            </Button>
+                            </button>
                         </div>
                     </div>
                 </div>

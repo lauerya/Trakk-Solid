@@ -1,16 +1,13 @@
 import {useGlobalContext} from "../state";
 import {Area} from "../types/main";
 import {supabase} from "../supabase-client";
-import {onMount, Show} from "solid-js";
-import {
-    createDisclosure,
-} from "@hope-ui/solid";
+import {createSignal, onMount, Show} from "solid-js";
 import AreaCreate from "../components/Area/AreaCreate";
 import {A} from "@solidjs/router";
 
 export default function Areas() {
     const {areas, setAreas } = useGlobalContext();
-    const { isOpen, onOpen, onClose } = createDisclosure()
+    const [ isOpen, onOpen ] = createSignal(false)
 
     onMount(() => {
         getAreas().then(() => console.log(`areas fetched: ${JSON.stringify(areas())}`))
