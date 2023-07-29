@@ -1,16 +1,22 @@
 import {supabase} from "../supabase-client";
-import {Show} from "solid-js";
+import {createSignal, onMount, Show} from "solid-js";
 import {A} from "@solidjs/router";
+import {Area} from "~/types/main";
 
 export default function TaskComponent(props: any) {
 
-    function getAreaId(areaId: number){
-        switch (areaId) {
-            case 1:
-                return "Kitchen"
-            default:
-                return areaId
-        }
+    const [areas, setAreas] = createSignal<Area[] | undefined>();
+
+    onMount(async () => {
+        let {data: areas, error} = await supabase
+            .from('areas')
+            .select('id,name')
+        if (error) {return;}
+        setAreas(areas as Area[])
+    });
+    function getAreaName(areaId: number) {
+         var matchingArea = areas()?.find((area) => { return area.id == areaId.toString()})
+        return matchingArea?.name
     }
 
     function getEffort(effortId: string){
@@ -50,7 +56,7 @@ export default function TaskComponent(props: any) {
                                 {props.todo.description}
                             </p>
                             <p class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0 sm:ml-6">
-                                {getAreaId(props.todo.areaId )}
+                                {getAreaName(props.todo.areaId )}
                             </p>
                         </div>
                         <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@hope-ui/solid": "^0.6.7",
+    "@rnwonder/solid-date-picker": "^0.7.7",
     "@solidjs/meta": "^0.28.2",
     "@solidjs/router": "^0.8.2",
     "@supabase/supabase-js": "^2.26.0",

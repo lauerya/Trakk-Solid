@@ -5,7 +5,7 @@ import {Task} from "../types/main";
 import {useGlobalContext} from "../state";
 
 
-function TaskList() {
+function TaskList(props: any) {
     const [loading, setLoading] = createSignal(true)
     const [taskList, setTaskList] = createSignal<Task[] | null>(null)
     const {tasks, setTasks} = useGlobalContext();
@@ -40,6 +40,19 @@ createEffect(() => {
 
     }
     const getTaskList = async (): Promise<Task[]> => {
+        if (props.filter == "Upcoming") {
+            let { data: tasks, error } = await supabase
+                .from('tasks')
+                .select("*")
+                .gt('dueDate', new Date().toISOString())
+                .lt('dueDate', new Date(new Date().setDate(new Date().getDate() + 7)).toISOString())
+            if (error){
+                console.log(error)
+                throw error
+            }
+            setTasks(tasks as Task[]);
+            return tasks as Task[]
+        }
         const {data, error} = await supabase.from('tasks').select()
         if (error){
             console.log(error)

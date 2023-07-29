@@ -5,19 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a12670cf-03e2-4818-ade7-c17a81394c61" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/routes/AreaEdit/[id].tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/routes/AreaTasks/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/routes/Upcoming.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Area/AreaCreate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Area/AreaCreate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Area/AreaEdit.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddTask/AddTaskForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTask/AddTaskForm.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Overview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Overview.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/AreaTasks/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AreaTasks/[id].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/routes/Areas.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Areas.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/routes/Today.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Today.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript JSX File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,7 +67,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1690573857686</updated>
-      <workItem from="1690573860630" duration="6187000" />
+      <workItem from="1690573860630" duration="11833000" />
     </task>
     <servers />
   </component>

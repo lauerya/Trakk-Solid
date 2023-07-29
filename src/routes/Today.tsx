@@ -25,7 +25,7 @@ export default function Today() {
 
     return (
         <div>
-            <Overview></Overview>
+            <Overview type="Today"></Overview>
                 <TaskList></TaskList>
                     <Show when={isOpen}>
                         <Modal size={"xl"} opened={isOpen()} onClose={onClose}>
