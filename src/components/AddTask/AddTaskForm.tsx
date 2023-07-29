@@ -15,18 +15,14 @@ import {
     SelectTrigger, SelectValue
 } from "@hope-ui/solid";
 import {Area, Profile, Task} from "~/types/main";
-import { unstable_clientOnly } from "solid-start";
-import {PickerValue, utils} from "@rnwonder/solid-date-picker";
-const DatePicker = unstable_clientOnly(
-    () => import("@rnwonder/solid-date-picker")
-);
+
 export function AddTaskForm(props: any) {
     const [user, setUser] = createSignal<User | null>();
     const [areas, setAreas] = createSignal<Area[] | null>()
     const [users, setUsers] = createSignal<Profile[]>()
     const [errorMessage, setErrorMessage] = createSignal<string>("")
     const [effortTypes, setEffortTypes] = createSignal<EffortType[]>()
-    const [dueDate, setDueDate] = createSignal<PickerValue>({
+    const [dueDate, setDueDate] = createSignal<any>({
         value: {},
         label: "",
     });
@@ -239,19 +235,19 @@ export function AddTaskForm(props: any) {
                                     <label for="dueDate" //TODO: Figure out how the datepicker can be above modal.
                                            class="block text-sm font-medium text-gray-700">Due Date</label>
                                     <div class="mt-1">
-                                        <DatePicker value={dueDate} setValue={setDueDate} minDate={utils().getToday()}
-                                                    onChange={(data) => {
-                                                        if (data.type === "range") {
-                                                            console.log(data.startDate, data.endDate);
-                                                        }
-                                                        if (data.type === "single") {
+                                        {/*<DatePicker value={dueDate} setValue={setDueDate} minDate={utils().getToday()}*/}
+                                        {/*            onChange={(data) => {*/}
+                                        {/*                if (data.type === "range") {*/}
+                                        {/*                    console.log(data.startDate, data.endDate);*/}
+                                        {/*                }*/}
+                                        {/*                if (data.type === "single") {*/}
 
-                                                            console.log(data.selectedDate);
-                                                        }
-                                                        if (data.type === "multiple") {
-                                                            console.log(data.multipleDates);
-                                                        }
-                                                    }}/>
+                                        {/*                    console.log(data.selectedDate);*/}
+                                        {/*                }*/}
+                                        {/*                if (data.type === "multiple") {*/}
+                                        {/*                    console.log(data.multipleDates);*/}
+                                        {/*                }*/}
+                                        {/*            }}/>*/}
                                     </div>
                                 </div>
                             </div>
