@@ -1,6 +1,6 @@
 import {supabase} from "../supabase-client";
 import {createSignal, onMount, Show} from "solid-js";
-import {A} from "@solidjs/router";
+import {A, Link} from "@solidjs/router";
 import {Area} from "~/types/main";
 
 export default function TaskComponent(props: any) {
@@ -39,7 +39,7 @@ export default function TaskComponent(props: any) {
 
     return <>
         <li>
-            <A href="#" class="block hover:bg-gray-50">
+            <Link href={'/Task/'+props.todo.id} class="block hover:bg-gray-50">
                 <div class="px-4 py-4 sm:px-6">
                     <button class="inline-flex items-center rounded-full bg-red-100 px-2.5 py-0.5 text-xs font-medium text-red-800" onClick={() => deleteTodo(props.todo.id)}>X</button>
                     <div class="flex items-center justify-between">
@@ -70,7 +70,7 @@ export default function TaskComponent(props: any) {
                         </div>
                     </div>
                 </div>
-            </A>
+            </Link>
         </li>
     </>
 }
