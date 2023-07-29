@@ -1,4 +1,5 @@
 interface Task {
+    id: number,
     created_at?: string
     name: string;
     areaId?: number;

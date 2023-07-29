@@ -1,4 +1,4 @@
-import {createEffect, createSignal, For, onMount} from "solid-js";
+import {createEffect, createSignal, For, onMount, Show} from "solid-js";
 import {supabase} from "~/supabase-client";
 import {User, UserResponse} from "@supabase/supabase-js";
 import {createStore} from "solid-js/store";
@@ -6,7 +6,6 @@ import {EffortType} from "~/types/main";
 import { VsAdd } from 'solid-icons/vs'
 import {
     Button,
-    Input,
     Select,
     SelectContent, SelectIcon,
     SelectListbox,
@@ -27,6 +26,7 @@ export function AddTaskForm(props: any) {
         label: "",
     });
     const [taskForm, setTaskForm] = createStore<Task>({
+        id: 0,
         name: "",
         assignedTo: "",
         effort: 0,
@@ -43,6 +43,9 @@ export function AddTaskForm(props: any) {
         await getAreas();
         await getProfiles();
 
+        if (props?.task) {
+            setTaskForm(props.task);
+        }
         setEffortTypes([{effortName: "Easy Peasy"}, {effortName: "Shouldn't be too bad"}, {effortName: "This'll be rough"}])
     })
     createEffect(() => console.log(taskForm.name))
@@ -68,6 +71,7 @@ export function AddTaskForm(props: any) {
             await getUserId();
         }
         setTaskForm({
+            id: taskForm.id,
             name: taskForm.name,
             assignedTo: taskForm.assignedTo,
             effort: taskForm.effort,
@@ -132,6 +136,16 @@ export function AddTaskForm(props: any) {
 
     }
 
+    async function updateTask() {
+        const {data, error} = await supabase.from('tasks').update(taskForm).eq('id', taskForm.id)
+        if (error) {
+            console.log(error)
+            throw error
+        }
+        console.log(data)
+        return data;
+    }
+
     return (
 <>
              <form onSubmit={() => addNewTask()}>
@@ -145,24 +159,24 @@ export function AddTaskForm(props: any) {
                  </div>
                     <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
                         <div class="sm:col-span-3">
-                            <label for="task-name" class="block text-sm font-medium text-gray-700">Task</label>
+                            <label for="task-name" class="block text-sm font-medium text-black">Task</label>
                             <div class="mt-1">
-                                <Input value={taskForm.name} onChange={updateFormField("name")} type="text"
+                                <input value={taskForm.name} onChange={updateFormField("name")} type="text"
                                        name="first-name" id="task-name" autocomplete="task"
-                                       class="block w-1/2 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
+                                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black sm:text-sm"/>
                             </div>
                         </div>
 
                         <div class="sm:col-span-3">
-                            <label for="description" class="block text-sm font-medium text-gray-700">description</label>
+                            <label for="description" class="block text-sm font-medium text-black">description</label>
                             <div class="mt-1">
-                                <Input value={taskForm.description} onChange={updateFormField("description")}
+                                <input value={taskForm.description} onChange={updateFormField("description")}
                                        type="text" name="description" id="description" autocomplete="description"
-                                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"/>
+                                       class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 text-black sm:text-sm"/>
                             </div>
                         </div>
                         <div class="sm:col-span-3">
-                            <label for="area" class="block text-sm font-medium text-gray-700">Area</label>
+                            <label for="area" class="block text-sm font-medium text-black">Area</label>
                             <div class="mt-1">
                                 <Select value={taskForm.areaId} onChange={updateFormField("areaId")}>
                                     <SelectTrigger>
@@ -186,7 +200,7 @@ export function AddTaskForm(props: any) {
                                 </div>
                         </div>
                             <div class="sm:col-span-3">
-                                <label for="effortType" class="block text-sm font-medium text-gray-700">Effort?</label>
+                                <label for="effortType" class="block text-sm font-medium text-black">Effort?</label>
                                 <div class={"mt-1"}>
                                 <Select value={taskForm.effort} onChange={updateFormField("effort")}>
                                     <SelectTrigger>
@@ -210,7 +224,7 @@ export function AddTaskForm(props: any) {
                                 </div>
                         </div>
                         <div class="sm:col-span-3">
-                            <label for="area" class="block text-sm font-medium text-gray-700">Assigned To</label>
+                            <label for="area" class="block text-sm font-medium text-black">Assigned To</label>
                             <div class="mt-1">
                                 <Select value={taskForm.assignedTo} onChange={updateFormField("assignedTo")}>
                                     <SelectTrigger>
@@ -233,7 +247,7 @@ export function AddTaskForm(props: any) {
                                 </Select>
                                 <div class="sm:col-span-3">
                                     <label for="dueDate" //TODO: Figure out how the datepicker can be above modal.
-                                           class="block text-sm font-medium text-gray-700">Due Date</label>
+                                           class="block text-sm font-medium text-black">Due Date</label>
                                     <div class="mt-1">
                                         {/*<DatePicker value={dueDate} setValue={setDueDate} minDate={utils().getToday()}*/}
                                         {/*            onChange={(data) => {*/}
@@ -254,12 +268,24 @@ export function AddTaskForm(props: any) {
                         </div>
                     </div>
                 </form>
-    <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
-        await addNewTask();
-    }}
-            class="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-        Add Task
-    </Button>
+    <Show when={props.task == null} >
+        <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
+            await addNewTask();
+        }}
+                class="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+
+            Add Task
+        </Button>
+    </Show>
+    <Show when={props.task.id != null}>
+        <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
+            await updateTask();
+        }}
+                class="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+
+            Update Task
+        </Button>
+    </Show>
         </>
 
 
