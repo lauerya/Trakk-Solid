@@ -3,7 +3,6 @@ import {supabase} from "~/supabase-client";
 import {createSignal, For, onMount, Show} from "solid-js";
 import {useParams} from "@solidjs/router";
 import TaskComponent from "~/components/TaskComponent";
-import {AddTaskModal} from "~/components/AddTask/AddTaskModal";
 import {AddTaskForm} from "~/components/AddTask/AddTaskForm";
 const [taskList, setTaskList] = createSignal<Task[]>([])
 

@@ -4,9 +4,8 @@ import {User, UserResponse} from "@supabase/supabase-js";
 import {createStore} from "solid-js/store";
 import {EffortType} from "~/types/main";
 import { VsAdd } from 'solid-icons/vs'
-
 import {
-    Button, Icon,
+    Button,
     Input,
     Select,
     SelectContent, SelectIcon,
@@ -16,9 +15,8 @@ import {
     SelectTrigger, SelectValue
 } from "@hope-ui/solid";
 import {Area, Profile, Task} from "~/types/main";
-import {DatePickerDay} from "@rnwonder/solid-date-picker/types/components/DatePickerDay";
 import { unstable_clientOnly } from "solid-start";
-import {DateMath, PickerValue, utils} from "@rnwonder/solid-date-picker";
+import {PickerValue, utils} from "@rnwonder/solid-date-picker";
 const DatePicker = unstable_clientOnly(
     () => import("@rnwonder/solid-date-picker")
 );

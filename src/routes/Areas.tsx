@@ -1,16 +1,9 @@
 import {useGlobalContext} from "../state";
 import {Area} from "../types/main";
 import {supabase} from "../supabase-client";
-import {createEffect, onMount, Show} from "solid-js";
+import {onMount, Show} from "solid-js";
 import {
-    Button,
     createDisclosure,
-    Modal,
-    ModalBody, ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay
 } from "@hope-ui/solid";
 import AreaCreate from "../components/Area/AreaCreate";
 import {A} from "@solidjs/router";
