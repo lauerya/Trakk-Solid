@@ -1,6 +1,6 @@
 import {createStore} from "solid-js/store";
-import {Area, Profile, Task} from "~/types/main";
-import {createSignal, onMount, Show} from "solid-js";
+import {Area} from "~/types/main";
+import {createSignal, Show} from "solid-js";
 import {supabase} from "~/supabase-client";
 import {Button} from "@hope-ui/solid";
 import {User, UserResponse} from "@supabase/supabase-js";

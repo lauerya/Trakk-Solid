@@ -17,7 +17,6 @@ export default function Weather(){
 
     onMount(async () => {
         await getLocation();
-        //await getWeatherAPI();
     })
     function getWeatherAPI(city: string){
         if (city == undefined){
@@ -33,9 +32,7 @@ export default function Weather(){
     }
     return (
         <section class="container">
-            {/*<input type="text" name="" placeholder="Search city name here..." id="city-name"/>*/}
-            {/*    <button id="findBtn">Find Weather</button>*/}
-                <section class="result-container">
+                <section class="result-container text-black">
                     <p>Weather: <span id="weather-description"> {weather()?.weather[0].description}</span></p>
                     <p>Temperature: <span id="temp">{weather()?.main?.temp} F</span></p>
                     <p>Wind Speed: <span id="wind-speed">{weather()?.wind?.speed} mph</span></p>

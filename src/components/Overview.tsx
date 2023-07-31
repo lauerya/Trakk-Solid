@@ -1,9 +1,9 @@
 import Weather from "./Weather";
 import {useGlobalContext} from "../state";
 import {A} from "@solidjs/router";
-import {For} from "solid-js";
+import {For, Show} from "solid-js";
 
-export default function Overview(){
+export default function Overview(props: any){
     const {tasks, areas} = useGlobalContext()
 
     return (
@@ -19,7 +19,12 @@ export default function Overview(){
                                 </div>
                                 <div class="ml-5 w-0 flex-1">
                                     <dl>
-                                        <dt class="truncate text-sm font-medium text-gray-500">Tasks for today</dt>
+                                        <Show when={props.type=="Upcoming"}>
+                                            <dt class="truncate text-sm font-medium text-gray-500">Upcoming Tasks</dt>
+                                        </Show>
+                                        <Show when={props.type=="Today"}>
+                                            <dt class="truncate text-sm font-medium text-gray-500">Tasks for today</dt>
+                                        </Show>
                                         <dd>
                                             <div
                                                 class="text-lg font-medium text-gray-900">{tasks()?.length}</div>
