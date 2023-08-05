@@ -150,7 +150,7 @@ export function AddTaskForm(props: any) {
 <>
              <form onSubmit={() => addNewTask()}>
                     <div>
-                        <h3 class="text-lg font-medium leading-6 text-gray-900">What needs to get done?</h3>
+                        <h3 class="text-lg font-medium leading-6 text-black">What needs to get done?</h3>
                         <p class="mt-1 text-sm text-gray-500">There's nothing too big to tackle
                         </p>
                     </div>
@@ -181,7 +181,7 @@ export function AddTaskForm(props: any) {
                                 <Select value={taskForm.areaId} onChange={updateFormField("areaId")}>
                                     <SelectTrigger>
                                         <SelectPlaceholder>Choose an area</SelectPlaceholder>
-                                        <SelectValue />
+                                        <SelectValue class={"text-black"} />
                                         <SelectIcon />
                                     </SelectTrigger>
                                     <SelectContent>
@@ -229,7 +229,7 @@ export function AddTaskForm(props: any) {
                                 <Select value={taskForm.assignedTo} onChange={updateFormField("assignedTo")}>
                                     <SelectTrigger>
                                         <SelectPlaceholder>Choose a User</SelectPlaceholder>
-                                        <SelectValue/>
+                                        <SelectValue class={"text-black"}/>
                                         <SelectIcon/>
                                     </SelectTrigger>
                                     <SelectContent>
@@ -268,7 +268,7 @@ export function AddTaskForm(props: any) {
                         </div>
                     </div>
                 </form>
-    <Show when={props.task == null} >
+    <Show when={props?.task == null} >
         <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
             await addNewTask();
         }}
@@ -277,7 +277,7 @@ export function AddTaskForm(props: any) {
             Add Task
         </Button>
     </Show>
-    <Show when={props.task.id != null}>
+    <Show when={props?.task?.id != null}>
         <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
             await updateTask();
         }}

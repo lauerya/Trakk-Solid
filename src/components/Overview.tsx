@@ -1,11 +1,18 @@
 import Weather from "./Weather";
 import {useGlobalContext} from "../state";
 import {A} from "@solidjs/router";
-import {For, Show} from "solid-js";
+import {For, onMount, Show} from "solid-js";
+import {supabase} from "~/supabase-client";
+import {Area, Task} from "~/types/main";
 
 export default function Overview(props: any){
-    const {tasks, areas} = useGlobalContext()
+    const {tasks, setTasks, areas, setAreas} = useGlobalContext()
 
+    onMount(() => {
+        if (areas()?.length == 0) {supabase.from('areas').select('*').then(({data}) => setAreas(data as Area[]))}
+        if (tasks()?.length == 0) {supabase.from('tasks').select('*').then(({data}) => setTasks(data as Task[]))}
+
+    })
     return (
         <div class="mt-8">
             <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8" style="padding: 2em">
@@ -37,11 +44,11 @@ export default function Overview(props: any){
                     <A href={"/AreaTasks"} class="overflow-hidden rounded-lg bg-gray-300 shadow">
                         <div class="p-5">
                             <div class="flex items-center">
-                                <div class="truncate text-sm font-medium text-gray-500">Areas</div>
-                                <div class="ml-5 w-0 flex-1">
+                                <div class="truncate text-sm font-medium text-black">Areas</div>
+                                <div class="ml-5 w-0 flex-1 text-black">
                                     <For each={areas()}>{(area, i) =>
-                                        <div class={"border-2 rounded-md m-2 bg-gray-50"}>
-                                            <a target="_blank" href={`/areas/${area.id}`}>
+                                        <div class={"rounded-md m-2"}>
+                                            <a class={"text-black"} target="_blank" href={`/areas/${area.id}`}>
                                                 {area.name}
                                             </a>
                                         </div>

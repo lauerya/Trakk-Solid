@@ -5,10 +5,12 @@ import {supabase} from "../../supabase-client";
 import {Button} from "@hope-ui/solid";
 import {User, UserResponse} from "@supabase/supabase-js";
 import {useParams} from "@solidjs/router";
+import {VsAdd} from "solid-icons/vs";
 
 
 export default function AreaEdit(){
     let fileInputRef: any = null;
+    const [areaParam, setAreaParam] = createSignal<string>();
     const [errorMessage, setErrorMessage] = createSignal<string>("")
     const [user, setUser] = createSignal<User | null>();
     const [areaForm, setAreaForm] = createStore<Area>({
@@ -18,7 +20,7 @@ export default function AreaEdit(){
         user_id: "",
         size: 'Small',
         image: '',
-        house_id: 1 //TODO GEt house id from user's house
+        house_id: 1
     }as Area);
 
     async function getUserId() {
@@ -38,11 +40,11 @@ export default function AreaEdit(){
     }
 
     onMount(async () => {
-        const params = useParams<{ id: string }>();
+        setAreaParam(useParams<{ id: string }>().id)
         let { data, error } = await supabase
             .from('areas')
             .select("*")
-            .is('id', params.id)
+            .eq('id', areaParam())
         if (data) {
             let area = data[0];
             setAreaForm({
@@ -122,6 +124,25 @@ export default function AreaEdit(){
             });
         }
     };
+
+    async function updateArea() {
+        var validForm = validateForm();
+        if (!validForm) {return};
+        var userId = await getUserId();
+        var imageUrl = handleImageChange();
+        var areaFormToSend = {
+            name: areaForm.name,
+            description: areaForm.description,
+            created_at: areaForm.created_at,
+            user_id: userId,
+            image: areaForm.image,
+            house_id: areaForm.house_id,
+        }
+        console.log("Area form to send: ", areaFormToSend)
+        const {data, error} = await supabase.from('areas').update(areaFormToSend).eq('id', areaForm.id)
+        console.log("Data: ", data)
+    }
+
     return (
         <>
 
@@ -136,6 +157,7 @@ export default function AreaEdit(){
                                 <div class="mt-1 flex rounded-md shadow-sm">
                                     <input
                                         onChange={updateFormField("name")}
+                                        value={areaForm?.name}
                                         type="text"
                                         name="areaName"
                                         id="areaName"
@@ -150,6 +172,7 @@ export default function AreaEdit(){
                                 </label>
                                 <div class="mt-1">
                 <textarea
+                    value={areaForm.description}
                     onChange={updateFormField("description")}
                     id="description"
                     name="description"
@@ -161,6 +184,7 @@ export default function AreaEdit(){
                             </div>
 
                             <input
+                                value={areaForm.image}
                                 type="file"
                                 hidden
                                 ref={fileInputRef}
@@ -203,9 +227,21 @@ export default function AreaEdit(){
                                     </select>
                                 </div>
                             </div>
+                            <Show when={areaParam() != null}>
+                                <Button leftIcon={<VsAdd></VsAdd>} type="button" onClick={async (e: Event) => {
+                                    await updateArea();
+                                }}
+                                        class="inline-flex items-center rounded border border-transparent bg-indigo-600 px-2.5 py-1.5 text-xs font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+
+                                    Update Task
+                                </Button>
+                            </Show>
+                            <Show when={areaParam() == null}>
+
                             <Button  class="button btn btn-primary bg-blue-500" onClick={() => addNewArea()}>Create New
                                 Area
                             </Button>
+                            </Show>
                         </div>
                     </div>
                 </div>
