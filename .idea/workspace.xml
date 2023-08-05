@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="a12670cf-03e2-4818-ade7-c17a81394c61" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddTask/AddTaskForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTask/AddTaskForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Overview.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Overview.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/AreaEdit/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/AreaEdit/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/routes/Task/[task_id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/routes/Task/[task_id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vite.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/vite.config.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
