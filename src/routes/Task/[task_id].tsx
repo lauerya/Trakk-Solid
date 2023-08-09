@@ -2,20 +2,23 @@ import {Task} from "~/types/main";
 import {supabase} from "~/supabase-client";
 import {createSignal, For, onMount, Show} from "solid-js";
 import {useParams} from "@solidjs/router";
-import TaskComponent from "~/components/TaskComponent";
 import {AddTaskForm} from "~/components/AddTask/AddTaskForm";
-const [task, setTask] = createSignal<Task[]>([])
+const [task, setTask] = createSignal<Task>()
 
-function TaskDetail(){
-    const getTask = async (): Promise<Task[]> => {
+export default function TaskDetail() {
+    async function getTask() {
         const params = useParams<{ task_id: string }>();
-        const {data, error} = await supabase.from('tasks').select("*").eq("id", params.task_id);
-        if (error){
+        const {data, error} = await supabase
+            .from('tasks')
+            .select('*')
+            .eq('id', params.task_id)
+
+        if (error) {
             console.log(error)
             throw error
         }
-        setTask(data[0]);
-        return data
+        console.log("Task Grabbed" + JSON.stringify(data));
+        setTask(data[0] as Task);
     }
 
     onMount(() => {
@@ -37,4 +40,3 @@ function TaskDetail(){
         </div>
     </>
 }
-export default TaskDetail;
